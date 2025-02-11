@@ -1120,6 +1120,20 @@
       }
     });
   </script>
+    <script>
+  document.addEventListener("DOMContentLoaded", function() {
+  const toggleButtons = document.querySelectorAll('.toggle-links');
+  toggleButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      // Se asume que el div .platform-links es el siguiente hermano del botón.
+      const linksContainer = this.nextElementSibling;
+      if (linksContainer) {
+        linksContainer.classList.toggle('open');
+      }
+    });
+  });
+});
+  </script>
 
 </body>
 </html>
