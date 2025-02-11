@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="GamaTreff - Música Personalizada y Experiencias Interactivas. Descubre canciones únicas creadas con pasión.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GamaTreff - Música Personalizada y Experiencias Interactivas</title>
+  <!-- Fuente Montserrat para un look moderno y profesional -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <!-- Íconos de Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ===============================
+       Variables para tamaños tipográficos uniformes
+    ================================ */
+    :root {
+      --h1-size: 2.5rem;
+      --h2-size: 2rem;
+      --h3-size: 1.5rem;
+      --body-font-size: 1rem;
+    }
+    h1 {
+      font-size: var(--h1-size);
+    }
+    h2 {
+      font-size: var(--h2-size);
+    }
+    h3 {
+      font-size: var(--h3-size);
+    }
+    body, p, li, input, button, a {
+      font-size: var(--body-font-size);
+    }
+    
+    /* Reset y estilos básicos */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    /* Fuente y estilos base */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      text-align: center;
+      transition: background 0.5s ease-in-out;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+    body.light-mode {
+      background: linear-gradient(45deg, #f5f7fa, #c3cfe2) !important;
+      color: #333;
+    }
+    body.light-mode nav ul li a { color: #007BFF; }
+    body.light-mode .theme-toggle { color: #007BFF; }
+    body.light-mode #typewriter { border-right: .15em solid #007BFF; }
+    body.light-mode .song-card audio,
+    body.light-mode .theme-card audio { border: 1px solid #007BFF; }
+    /* Canvas y SVG de fondo */
+    #particleCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -3;
+      pointer-events: none;
+    }
+    #svgOverlay {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      z-index: -2;
+      pointer-events: none;
+    }
+    .wave { fill: rgba(255, 255, 255, 0.25); }
+    .wave.wave1 {
+      animation: waveAnimation1 12s ease-in-out infinite;
+      fill: rgba(255,255,255,0.3);
+    }
+    .wave.wave2 {
+      animation: waveAnimation2 10s ease-in-out infinite;
+      fill: rgba(255,255,255,0.2);
+    }
+    .wave.wave3 {
+      animation: waveAnimation3 14s ease-in-out infinite;
+      fill: rgba(255,255,255,0.15);
+    }
+    @keyframes waveAnimation1 {
+      0% { transform: translateX(0px) translateY(0px); }
+      50% { transform: translateX(-60px) translateY(10px); }
+      100% { transform: translateX(0px) translateY(0px); }
+    }
+    @keyframes waveAnimation2 {
+      0% { transform: translateX(0px) translateY(0px); }
+      50% { transform: translateX(40px) translateY(-10px); }
+      100% { transform: translateX(0px) translateY(0px); }
+    }
+    @keyframes waveAnimation3 {
+      0% { transform: translateX(0px) translateY(0px); }
+      50% { transform: translateX(-30px) translateY(5px); }
+      100% { transform: translateX(0px) translateY(0px); }
+    }
+    /* Cabecera y navegación */
+    header {
+      background: linear-gradient(135deg, rgba(0,4,40,0.8), rgba(0,78,146,0.8));
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header.light-mode { background: rgba(255, 255, 255, 0.9); }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: auto;
+      width: 100%;
+      position: relative;
+    }
+    .logo { font-size: 1.8em; font-weight: bold; }
+    nav ul { 
+      list-style: none; 
+      display: flex; 
+      gap: 15px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #ffcc00;
+      font-size: 1.2em;
+      transition: 0.3s;
+    }
+    nav ul li a:hover { color: #fff; }
+    .theme-toggle, .menu-toggle {
+      background: none;
+      border: none;
+      color: #ffcc00;
+      font-size: 1.5em;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .theme-toggle:hover, .menu-toggle:hover { color: #fff; }
+    .menu-toggle { margin-left: 10px; display: none; }
+    /* Contenedor principal y secciones */
+    .container {
+      padding-top: 120px;
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+    section {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      margin: 30px 0;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.3s, opacity 0.6s;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    section.visible { opacity: 1; transform: translateY(0); }
+    h1, h2 { margin-bottom: 15px; }
+    p { margin-bottom: 15px; }
+    /* Efecto typewriter */
+    #typewriter {
+      display: inline-block;
+      overflow: hidden;
+      border-right: .15em solid #ffcc00;
+      white-space: nowrap;
+      letter-spacing: .15em;
+      animation: caret 1s steps(1) infinite;
+    }
+    @keyframes caret { 50% { border-color: transparent; } }
+    /* Sección "Sobre Mi" */
+    .about-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .about-image {
+      flex: 1 1 300px;
+      max-width: 300px;
+      border-radius: 10px;
+      transition: transform 0.5s;
+    }
+    .about-image:hover { transform: scale(1.05) rotate(2deg); }
+    .about-text { flex: 2 1 400px; text-align: left; }
+    /* Sección "Temas" */
+    #temas { padding: 30px 10px; }
+    #temas h2 { margin-bottom: 20px; }
+    .theme-cards {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-top: 20px;
+    }
+    .theme-card {
+      flex: none;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 15px;
+      min-width: 200px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+      position: relative;
+    }
+    .theme-card img, 
+    .about-image, 
+    .gallery img,
+    .song-card img,
+    #inicio img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .theme-card h3 { margin: 10px 0; }
+    .theme-card p { font-size: 0.9em; margin: 5px 0; }
+    /* Reproductor de audio en tarjetas de Temas */
+    .theme-card audio {
+      width: 100%;
+      margin-top: 10px;
+    }
+    /* Botón Toggle para Links */
+    .toggle-links {
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: #ffcc00;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .toggle-links:hover { background: #e6b800; }
+    .platform-links {
+      margin-top: 10px;
+      display: none;
+      text-align: left;
+    }
+    .platform-links.open { display: block; }
+    .platform-links a {
+      display: block;
+      margin: 5px 0;
+      color: #ffcc00;
+      text-decoration: none;
+      font-size: 0.9em;
+    }
+    .platform-links a:hover { text-decoration: underline; }
+    /* Sección "Mis Canciones Personalizadas" */
+    #canciones { padding: 30px 10px; }
+    #canciones h2 { margin-bottom: 20px; }
+    .song-cards {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+    .song-card {
+      flex: none;
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: 15px;
+      min-width: 250px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .song-card h3 { margin: 10px 0; }
+    .song-card p { margin: 5px 0 10px; }
+    /* Reproductor de audio en tarjetas de Canciones Personalizadas */
+    .song-card audio {
+      width: 100%;
+      margin-top: 10px;
+    }
+    /* Sección "Servicio" */
+    #servicio {
+      padding: 30px 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      margin-bottom: 40px;
+    }
+    #servicio h2 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    #servicio p {
+      text-align: center;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+    #servicio ul.service-list {
+      list-style: none;
+      padding: 0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    #servicio ul.service-list li {
+      margin-bottom: 10px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    #servicio ul.service-list li i {
+      color: #ffcc00;
+      margin-right: 10px;
+    }
+    #servicio .service-note {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      color: #ffcc00;
+      margin-top: 20px;
+    }
+    /* Sección "Precios" (movida aquí) */
+    #precios {
+      padding: 30px 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      margin-bottom: 40px;
+    }
+    #precios h2 {
+      text-align: center;
+      font-size: 30px;
+      color: #ffcc00;
+      margin-bottom: 20px;
+    }
+    #precios p {
+      text-align: center;
+      font-size: 20px;
+      margin-bottom: 30px;
+      color: #fff;
+    }
+    .price-options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 20px;
+    }
+    .price-option {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 20px;
+      border-radius: 10px;
+      flex: 1 1 250px;
+      max-width: 300px;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+    .price-option h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #ffcc00;
+    }
+    .price-option p {
+      font-size: 20px;
+      line-height: 1.5;
+    }
+    /* Sección "Personaliza tu Música" */
+    #personalizacion {
+      padding: 30px 10px;
+    }
+    #personalizacion h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    #personalizacion form p {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    #personalizacion form div.plan-field label {
+  text-align: center;
+}
+    /* Nuevo campo para elegir el plan */
+    #personalizacion form div.plan-field {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    #personalizacion form div.plan-field label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    #personalizacion form div.plan-field select {
+      width: 300px;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin: 0 auto; 
+      display: block;
+    }
+    #personalizacion form label input[type="checkbox"] {
+      margin-right: 5px;
+    }
+    /* Sección de Términos y Condiciones */
+    #terminos h2 {
+      text-align: center;
+      font-size: 30px;
+      color: #ffcc00;
+      margin-bottom: 20px;
+    }
+    #terminos ul {
+      max-width: 800px;
+      margin: 0 auto;
+      list-style: disc;
+      padding-left: 40px;
+      font-size: 20px;
+      color: #fff;
+      line-height: 1.6;
+    }
+    #terminos li {
+      margin-bottom: 15px;
+    }
+    #terminos .disclaimer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 18px;
+      color: #ffcc00;
+      font-style: italic;
+    }
+    /* Botón "Volver arriba" con efecto fade */
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #ffcc00;
+      color: #000;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1000;
+      font-size: 18px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s, opacity 0.3s;
+      opacity: 0;
+      pointer-events: none;
+    }
+    #scrollTopBtn.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #scrollTopBtn:hover { transform: scale(1.1); }
+    /* Footer */
+    footer {
+      margin-top: 20px;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 15px;
+    }
+    footer.light-mode { background: rgba(255, 255, 255, 0.9); }
+    /* Media Queries */
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: rgba(0,0,0,0.8);
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        border-radius: 5px;
+        padding: 10px;
+      }
+      nav ul.active {
+        display: flex;
+      }
+      nav ul li {
+        margin: 10px 0;
+      }
+      .menu-toggle { display: block; }
+      .about-content { flex-direction: column; }
+      audio { max-width: 100%; }
+    }
+    
+    /* ===============================
+       Chat Bot - Estilos Mejorados y Atractivos
+    ================================ */
+    #chatbot-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 320px;
+      max-height: 400px;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0px 6px 12px rgba(0,0,0,0.25);
+      overflow: hidden;
+      font-family: 'Montserrat', sans-serif;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+    #chatbot-container:hover {
+      transform: scale(1.02);
+    }
+    /* Inicialmente minimizado: solo se muestra el header */
+    #chatbot-messages, #chatbot-input-container {
+      display: none;
+    }
+    #chatbot-header {
+      background: linear-gradient(135deg, #00aaff, #0066cc);
+      color: #fff;
+      padding: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+    }
+    /* Cuando está minimizado, se muestra un mensaje incitante */
+    #chatbot-header.minimized {
+      background: linear-gradient(135deg, #00ccff, #0088cc);
+    }
+    #chatbot-toggle-icon {
+      font-size: 18px;
+    }
+    #chatbot-messages {
+      height: 250px;
+      overflow-y: auto;
+      padding: 10px;
+      background-color: #f0f0f0;
+      color: #333;
+      font-size: 14px;
+      flex-grow: 1;
+    }
+    #chatbot-input-container {
+      display: flex;
+      padding: 10px;
+      background-color: #e0e0e0;
+    }
+    #chatbot-input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    #chatbot-send {
+      padding: 8px 12px;
+      background-color: #00aaff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      margin-left: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    #chatbot-send:hover {
+      background-color: #0066cc;
+    }
+    
+    /* Botón flotante para ir al formulario */
+    #floatingButton {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #00aaff;
+      color: #fff;
+      border: none;
+      padding: 15px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1001;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    #floatingButton:hover {
+      transform: scale(1.05);
+      background: #00aaff;
+    }
+    
+  </style>
+</head>
+<body>
+  <!-- Canvas para partículas magnéticas -->
+  <canvas id="particleCanvas"></canvas>
+  
+  <!-- SVG de fondo con ondas -->
+  <svg id="svgOverlay" viewBox="0 0 1440 320" preserveAspectRatio="none">
+    <path class="wave wave1" d="M0,160 C360,260 1080,60 1440,160 L1440,320 L0,320 Z"></path>
+    <path class="wave wave2" d="M0,200 C480,100 960,300 1440,200 L1440,320 L0,320 Z"></path>
+    <path class="wave wave3" d="M0,240 C400,340 1040,140 1440,240 L1440,320 L0,320 Z"></path>
+  </svg>
+  
+  <header id="header">
+    <nav>
+      <div class="logo">GamaTreff</div>
+      <ul>
+        <li><a href="#inicio" class="nav-link">Inicio</a></li>
+        <li><a href="#sobre-mi" class="nav-link">Sobre Mí</a></li>
+        <li><a href="#temas" class="nav-link">Temas</a></li>
+        <li><a href="#canciones" class="nav-link">Canciones</a></li>
+        <li><a href="#servicio" class="nav-link">Producto</a></li>
+        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <button class="theme-toggle" id="themeToggle" title="Cambiar tema">
+        <i class="fas fa-adjust"></i>
+      </button>
+    </nav>
+  </header>
+  
+  <div class="container">
+    <!-- Sección de Inicio -->
+    <section id="inicio" class="section">
+      <h1><span id="typewriter"></span></h1>
+      <p>Descubre un mundo donde cada canción cuenta una historia única. Explora mi trabajo y déjate llevar por la magia de melodías personalizadas.</p>
+      <img src="inicio.jpg" alt="Imagen destacada de GamaTreff" loading="lazy" style="width:100%; border-radius:10px; margin-top:20px;">
+    </section>
+    
+    <!-- Sección "Sobre Mi" -->
+    <section id="sobre-mi" class="section">
+      <h2>Sobre Mi Música</h2>
+      <div class="about-content">
+        <img src="sobre-mi.jpg" alt="Imagen personal de Gama" class="about-image" loading="lazy">
+        <div class="about-text">
+          <p>Cada nota que compongo nace de una historia real, y cada melodía transmite una emoción única. Mi pasión es transformar sentimientos en canciones, ayudando a compartir momentos especiales a través de la música.</p>
+          <p>Ya sea una dedicatoria romántica o un mensaje inspirador, mi objetivo es crear piezas que toquen el corazón. ¿Tienes una historia que contar? ¡Hablemos y hagamos magia juntos!</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Sección "Temas" -->
+    <section id="temas" class="section">
+      <h2>Escucha mis Temas</h2>
+      <p>Encuentra algunas muestras de mi trabajo. Cada tema ha sido creado con dedicación para reflejar la esencia de una historia. Disfruta de la experiencia auditiva y descubre también links a mis plataformas.</p>
+      <div class="theme-cards">
+        <div class="theme-card">
+          <img src="tema1.jpg" alt="Imagen de Tema 1" loading="lazy">
+          <h3>Tema 1</h3>
+          <p>Plataforma: Spotify</p>
+          <!-- Reproductor de audio visible -->
+          <audio controls src="tema1.mp3" style="width:100%; margin-top:10px;"></audio>
+          <button class="toggle-links">Ver Links</button>
+          <div class="platform-links">
+            <a href="https://music.youtube.com/" target="_blank">YouTube Music</a>
+            <a href="https://open.spotify.com/" target="_blank">Spotify</a>
+            <a href="https://music.apple.com/" target="_blank">Apple Music</a>
+            <a href="https://www.deezer.com/" target="_blank">Deezer</a>
+          </div>
+        </div>
+        <div class="theme-card">
+          <img src="tema2.jpg" alt="Imagen de Tema 2" loading="lazy">
+          <h3>Tema 2</h3>
+          <p>Plataforma: Apple Music</p>
+          <audio controls src="tema2.mp3" style="width:100%; margin-top:10px;"></audio>
+          <button class="toggle-links">Ver Links</button>
+          <div class="platform-links">
+            <a href="https://music.youtube.com/" target="_blank">YouTube Music</a>
+            <a href="https://open.spotify.com/" target="_blank">Spotify</a>
+            <a href="https://music.apple.com/" target="_blank">Apple Music</a>
+            <a href="https://www.deezer.com/" target="_blank">Deezer</a>
+          </div>
+        </div>
+        <div class="theme-card">
+          <img src="tema3.jpg" alt="Imagen de Tema 3" loading="lazy">
+          <h3>Tema 3</h3>
+          <p>Plataforma: YouTube</p>
+          <audio controls src="tema3.mp3" style="width:100%; margin-top:10px;"></audio>
+          <button class="toggle-links">Ver Links</button>
+          <div class="platform-links">
+            <a href="https://music.youtube.com/" target="_blank">YouTube Music</a>
+            <a href="https://open.spotify.com/" target="_blank">Spotify</a>
+            <a href="https://music.apple.com/" target="_blank">Apple Music</a>
+            <a href="https://www.deezer.com/" target="_blank">Deezer</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Sección "Mis Canciones Personalizadas" -->
+    <section id="canciones" class="section">
+      <h2>Mis Canciones Personalizadas</h2>
+      <div class="song-cards">
+        <div class="song-card">
+          <img src="cancion1.jpg" alt="Imagen de Canción 1" loading="lazy">
+          <h3>Título de la Canción 1</h3>
+          <p>Género: Pop</p>
+          <!-- Reproductor de audio permanente -->
+          <audio controls src="cancion1.mp3" style="width:100%; margin-top:10px;"></audio>
+        </div>
+        <div class="song-card">
+          <img src="cancion2.jpg" alt="Imagen de Canción 2" loading="lazy">
+          <h3>Título de la Canción 2</h3>
+          <p>Género: Rock</p>
+          <audio controls src="cancion2.mp3" style="width:100%; margin-top:10px;"></audio>
+        </div>
+        <div class="song-card">
+          <img src="cancion3.jpg" alt="Imagen de Canción 3" loading="lazy">
+          <h3>Título de la Canción 3</h3>
+          <p>Género: Jazz</p>
+          <audio controls src="cancion3.mp3" style="width:100%; margin-top:10px;"></audio>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Sección "Servicio" -->
+    <section id="servicio" class="section">
+      <h2>Transforma tus ideas en una canción única</h2>
+      <p>¿Quieres una canción que refleje tu historia y emociones? ¡Estás en el lugar indicado!</p>
+      <ul class="service-list">
+        <li><i class="fas fa-music"></i> <strong>Canción 100% personalizada:</strong> Creamos tu canción basándonos en tus ideas.</li>
+        <li><i class="fas fa-pen"></i> <strong>Letras y géneros a tu medida:</strong> Elige entre pop, rock, balada o el estilo que prefieras.</li>
+        <li><i class="fas fa-globe"></i> <strong>Multilingüe:</strong> Principalmente en español e inglés, con opción a otros idiomas.</li>
+        <li><i class="fas fa-user-check"></i> <strong>Uso exclusivo:</strong> La canción es solo para ti, perfecta para regalos o momentos especiales.</li>
+        <li><i class="fas fa-check-circle"></i> <strong>Proceso fácil y rápido:</strong> Solo rellena el formulario y nosotros nos encargamos del resto.</li>
+      </ul>
+      <p class="service-note">¡Haz realidad tu sueño musical hoy mismo y sorpréndete con el resultado!</p>
+    </section>
+    
+    <!-- Sección "Precios" (movida aquí) -->
+    <section id="precios" class="section">
+      <h2>Precios y Opciones</h2>
+      <p class="launch-offer">¡Oferta de lanzamiento! Disfruta de precios especiales por tiempo limitado.</p>
+      <p>Elige la opción que mejor se adapte a tus necesidades para obtener tu canción personalizada:</p>
+      <div class="price-options">
+        <div class="price-option">
+          <h3>Opción Básica</h3>
+          <p><strong>$200</strong> - Canción personalizada basada en tus ideas. Incluye letra original y musica.</p>
+        </div>
+        <div class="price-option">
+          <h3>Opción Premium</h3>
+          <p><strong>$250</strong> - Canción personalizada. Incluye letra original, musica y dos revisiones.</p>
+        </div>
+        <div class="price-option">
+          <h3>Opción Deluxe</h3>
+          <p><strong>$350</strong> - Canción personalizada. Incluye letra original, musica, portada personalizada y tres revisiones.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Sección "Personaliza tu Música" (Formulario de Personalización) -->
+    <section id="personalizacion" class="section">
+      <h2>Personaliza tu Música</h2>
+      <p>Rellena el siguiente formulario para que empieces a crear tu personalización musical. ¡Entre más detalles me proporciones, mejor podré plasmar tus ideas en una canción única!</p>
+      <form id="personalization-form">
+        <div>
+          <label for="user_name">Nombre completo:</label>
+          <input type="text" id="user_name" name="user_name" placeholder="Tu nombre" required>
+        </div>
+        <div>
+          <label for="user_email">Correo o método de contacto:</label>
+          <input type="text" id="user_email" name="user_email">
+        </div>
+        <div>
+          <label for="user_phone">Teléfono (opcional):</label>
+          <input type="text" id="user_phone" name="user_phone" placeholder="Tu número de teléfono">
+        </div>
+        <!-- Nuevo campo para seleccionar el plan -->
+        <div class="plan-field">
+          <label for="plan">Selecciona tu Plan:</label>
+          <select id="plan" name="plan" required>
+            <option value="" disabled selected>-- Elige una opción --</option>
+            <option value="Basico">Básico</option>
+            <option value="Premium">Premium</option>
+            <option value="Deluxe">Deluxe</option>
+          </select>
+        </div>
+        <div>
+          <label for="occasion">Motivo u ocasión para la canción:</label>
+          <textarea id="occasion" name="occasion" placeholder="Ejemplo: cumpleaños, aniversario, boda, agradecimiento, etc." required></textarea>
+        </div>
+        <div>
+          <p>Géneros musicales (selecciona los que prefieras):</p>
+          <label><input type="checkbox" name="genres" value="Pop"> Pop</label>
+          <label><input type="checkbox" name="genres" value="Rock"> Rock</label>
+          <label><input type="checkbox" name="genres" value="Balada"> Balada</label>
+          <label><input type="checkbox" name="genres" value="Electrónica"> Electrónica</label>
+          <label><input type="checkbox" name="genres" value="Jazz"> Jazz</label>
+          <label><input type="checkbox" name="genres" value="Clásica"> Clásica</label>
+          <label><input type="checkbox" name="genres" value="Reggae"> Reggae</label>
+          <label><input type="checkbox" name="genres" value="Otros"> Otros (especifica en el mensaje)</label>
+          <!-- Campo oculto para almacenar los géneros seleccionados -->
+          <input type="hidden" id="genres_list" name="genres_list">
+        </div>
+        <div>
+          <label for="reference">Referencia musical (no enlaces, solo descripción):</label>
+          <input type="text" id="reference" name="reference" placeholder="Descripción de la referencia musical">
+        </div>
+        <div>
+          <label for="personal_message">Mensaje personal:</label>
+          <textarea id="personal_message" name="personal_message" rows="4" placeholder="Describe tus ideas, emociones y cualquier detalle que consideres importante..." required></textarea>
+        </div>
+        <div>
+          <label for="additional_info">Información adicional (lo que consideres relevante):</label>
+          <textarea id="additional_info" name="additional_info" rows="3" placeholder="Opcional"></textarea>
+        </div>
+        <button type="submit">Enviar</button>
+      </form>
+      <!-- Mensaje de instrucciones para la entrega del resultado -->
+      <p style="margin-top: 20px; text-align: center;">
+        Una vez enviado el formulario, me pondré en contacto contigo usando el método que hayas proporcionado (correo, teléfono, etc.). La canción personalizada se entregará a través del medio acordado, y recibirás una confirmación con más detalles sobre el proceso y tiempos de entrega.
+      </p>
+    </section>
+    
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="section">
+      <h2>Contacto</h2>
+      <p>Escríbeme a <a href="mailto:tuemail@ejemplo.com" style="color:#ffcc00;">tuemail@ejemplo.com</a> o sígueme en mis redes sociales.</p>
+    </section>
+    
+    <!-- Sección de Términos y Condiciones -->
+    <section id="terminos" class="section">
+      <h2>Términos y Condiciones</h2>
+      <ul>
+        <li>El precio final podrá ajustarse en función de las especificaciones y revisiones solicitadas.</li>
+        <li>La canción es de uso personal y no comercial, salvo acuerdo previo.</li>
+        <li>Se requiere un anticipo no superior al 50% para iniciar el proyecto, con el saldo a abonar a la entrega.</li>
+        <li>El tiempo de entrega varía según la opción seleccionada.</li>
+        <li>Las revisiones están limitadas al número estipulado en el paquete elegido.</li>
+        <li>Los precios mencionados corresponden a una canción individual; para la creación de múltiples canciones, se podrá aplicar un descuento.</li>
+        <li>Por motivos relacionados con derechos de autor, no se ofrecen covers.</li>
+        <li>Los derechos de autor se reservan al creador, a menos que se acuerde lo contrario.</li>
+      </ul>
+      <p class="disclaimer">
+        *Estos precios y condiciones están sujetos a cambios sin previo aviso. Contáctame para obtener más detalles o ajustar la propuesta a tus necesidades.
+      </p>
+    </section>
+  </div>
+  
+  <footer id="footer">
+    <p>&copy; 2025 GamaTreff. Todos los derechos reservados.</p>
+  </footer>
+  
+  <!-- Botón "Volver arriba" -->
+  <button id="scrollTopBtn" title="Volver arriba"><i class="fas fa-arrow-up"></i></button>
+  
+  <!-- Chat Bot siempre visible con nuevo estilo y estado inicial cerrado -->
+  <div id="chatbot-container">
+    <div id="chatbot-header" class="minimized">
+      Hola, ¿te puedo ayudar? <span id="chatbot-toggle-icon"><i class="fas fa-chevron-up"></i></span>
+    </div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input-container">
+      <input type="text" id="chatbot-input" placeholder="Escribe tu mensaje...">
+      <button id="chatbot-send">Enviar</button>
+    </div>
+  </div>
+
+  <!-- Botón flotante para ir al formulario -->
+  <button id="floatingButton">¡Empieza tu personalización!</button>
+  
+  <!-- ===============================
+       SCRIPTS
+  ================================ -->
+  <script>
+    // Aplicar tema guardado
+    if(localStorage.getItem('theme') === 'light'){
+      document.body.classList.add('light-mode');
+      document.getElementById('header').classList.add('light-mode');
+      document.getElementById('footer').classList.add('light-mode');
+    }
+    
+    // Smooth scroll para navegación
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({ top: targetElement.offsetTop - 80, behavior: 'smooth' });
+        }
+      });
+    });
+    
+    // Toggle de tema con localStorage
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      document.getElementById('header').classList.toggle('light-mode');
+      document.getElementById('footer').classList.toggle('light-mode');
+      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    });
+    
+    // Toggle menú hamburguesa en móviles
+    const menuToggle = document.getElementById('menuToggle');
+    const navUl = document.querySelector('nav ul');
+    menuToggle.addEventListener('click', () => {
+      navUl.classList.toggle('active');
+    });
+    
+    // Animación de secciones con IntersectionObserver
+    const sections = document.querySelectorAll('section');
+    const observerOptions = { threshold: 0.2 };
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    sections.forEach(section => observer.observe(section));
+    
+    // Botón "Volver arriba" con efecto fade
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+      if(window.pageYOffset > 300){
+        scrollTopBtn.classList.add('show');
+      } else {
+        scrollTopBtn.classList.remove('show');
+      }
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Efecto typewriter
+    const typewriterText = "Bienvenidos a GamaTreff - Música Personalizada";
+    const typewriterElement = document.getElementById('typewriter');
+    let charIndex = 0;
+    function typeWriter() {
+      if (charIndex < typewriterText.length) {
+        typewriterElement.textContent += typewriterText.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeWriter, 100);
+      }
+    }
+    window.addEventListener('load', typeWriter);
+    
+    // Efecto de Partículas Magnéticas
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const numParticles = 150;
+    const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+    
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 2;
+        this.vy = (Math.random() - 0.5) * 2;
+        this.radius = Math.random() * 2 + 1;
+      }
+      update() {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const effectRadius = 150;
+        if (distance < effectRadius) {
+          const force = (effectRadius - distance) / effectRadius;
+          const angle = Math.atan2(dy, dx);
+          this.vx += Math.cos(angle) * force * 0.5;
+          this.vy += Math.sin(angle) * force * 0.5;
+        }
+        this.vx *= 0.95;
+        this.vy *= 0.95;
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0) { this.x = 0; this.vx *= -1; }
+        if (this.x > canvas.width) { this.x = canvas.width; this.vx *= -1; }
+        if (this.y < 0) { this.y = 0; this.vy *= -1; }
+        if (this.y > canvas.height) { this.y = canvas.height; this.vy *= -1; }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 204, 0, 0.3)";
+        ctx.fill();
+      }
+    }
+    
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < numParticles; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        particles.push(new Particle(x, y));
+      }
+    }
+    initParticles();
+    
+    function animateParticles() {
+      ctx.fillStyle = document.body.classList.contains('light-mode') ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+    
+    /* ===============================
+       Chat Bot - Implementación con JS Puro
+    ================================ */
+    (function() {
+      const chatbotHeader = document.getElementById('chatbot-header');
+      const chatbotMessages = document.getElementById('chatbot-messages');
+      const chatbotInputContainer = document.getElementById('chatbot-input-container');
+      const chatbotInput = document.getElementById('chatbot-input');
+      const chatbotSend = document.getElementById('chatbot-send');
+      
+      let isMinimized = true;
+      chatbotMessages.style.display = 'none';
+      chatbotInputContainer.style.display = 'none';
+      chatbotHeader.innerHTML = 'Hola, ¿te puedo ayudar? <span id="chatbot-toggle-icon"><i class="fas fa-chevron-up"></i></span>';
+      chatbotHeader.classList.add('minimized');
+      
+      chatbotHeader.addEventListener('click', () => {
+        if (isMinimized) {
+          chatbotMessages.style.display = 'block';
+          chatbotInputContainer.style.display = 'flex';
+          chatbotHeader.innerHTML = 'Chat Bot <span id="chatbot-toggle-icon"><i class="fas fa-chevron-down"></i></span>';
+          chatbotHeader.classList.remove('minimized');
+          isMinimized = false;
+        } else {
+          chatbotMessages.style.display = 'none';
+          chatbotInputContainer.style.display = 'none';
+          chatbotHeader.innerHTML = 'Hola, ¿te puedo ayudar? <span id="chatbot-toggle-icon"><i class="fas fa-chevron-up"></i></span>';
+          chatbotHeader.classList.add('minimized');
+          isMinimized = true;
+        }
+      });
+      
+      function appendMessage(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.style.marginBottom = '10px';
+        messageElement.style.textAlign = sender === 'user' ? 'right' : 'left';
+        messageElement.innerHTML = `<strong>${sender === 'user' ? 'Tú' : 'Bot'}:</strong> ${message}`;
+        chatbotMessages.appendChild(messageElement);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+      
+      function botResponse(userMessage) {
+        let response = "Lo siento, no entiendo. ¿Puedes reformular?";
+        if(userMessage.toLowerCase().includes("hola")){
+          response = "¡Hola! ¿En qué puedo ayudarte?";
+        } else if(userMessage.toLowerCase().includes("adiós") || userMessage.toLowerCase().includes("chao")){
+          response = "¡Hasta luego!";
+        } else if(userMessage.toLowerCase().includes("gracias")){
+          response = "¡De nada!";
+        }
+        setTimeout(() => {
+          appendMessage('bot', response);
+        }, 500);
+      }
+      
+      chatbotSend.addEventListener('click', () => {
+        const message = chatbotInput.value.trim();
+        if(message !== ""){
+          appendMessage('user', message);
+          chatbotInput.value = "";
+          botResponse(message);
+        }
+      });
+      
+      chatbotInput.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter'){
+          chatbotSend.click();
+        }
+      });
+    })();
+  </script>
+  
+  <!-- Incluye EmailJS -->
+  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      // Inicializa EmailJS con tu User ID (en este caso, se usa el valor proporcionado)
+      emailjs.init("g2QrgmDofWM0mBurr");
+    })();
+  </script>
+  
+  <script>
+    // Envío del formulario de personalización con EmailJS, procesando los checkboxes de géneros
+    document.getElementById('personalization-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevenir el comportamiento por defecto
+
+      // Procesar los checkboxes de géneros y guardar el resultado en el campo oculto "genres_list"
+      const checkboxes = document.querySelectorAll('input[name="genres"]:checked');
+      let genresArray = [];
+      checkboxes.forEach((checkbox) => {
+        genresArray.push(checkbox.value);
+      });
+      document.getElementById('genres_list').value = genresArray.join(', ');
+
+      // Envía el formulario a través de EmailJS (ajusta los IDs de servicio y plantilla según tus datos)
+      emailjs.sendForm('service_v1guq8k', 'template_0gwbyg8', this)
+        .then(function() {
+          alert('¡Formulario enviado correctamente! Te contactaremos pronto.');
+          document.getElementById('personalization-form').reset();
+        }, function(error) {
+          alert('Ocurrió un error al enviar el formulario: ' + JSON.stringify(error));
+        });
+    });
+  </script>
+
+  <script>
+    document.getElementById('floatingButton').addEventListener('click', function() {
+      const formSection = document.getElementById('personalizacion');
+      if (formSection) {
+        formSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  </script>
+
+</body>
+</html>
