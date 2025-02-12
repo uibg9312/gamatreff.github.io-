@@ -784,7 +784,9 @@ footer.light-mode {
           <h3>Tema 1</h3>
           <p>Plataforma: Spotify</p>
           <!-- Reproductor de audio visible -->
-          <audio controls src="https://uibg9312.github.io/gamatreff.github.io-/tema1.mp3" style="width:100%; margin-top:10px;"></audio>
+
+          <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/tema1.ogg" style="width:100%; margin-top:10px;"></audio>
+
           <button class="toggle-links">Ver Links</button>
           <div class="platform-links">
             <a href="https://music.youtube.com/" target="_blank">YouTube Music</a>
@@ -797,7 +799,7 @@ footer.light-mode {
           <img src="tema2.jpg" alt="Imagen de Tema 2" loading="lazy">
           <h3>Tema 2</h3>
           <p>Plataforma: Apple Music</p>
-          <audio controls src="tema2.mp3" style="width:100%; margin-top:10px;"></audio>
+          <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/tema2.ogg" style="width:100%; margin-top:10px;"></audio>
           <button class="toggle-links">Ver Links</button>
           <div class="platform-links">
             <a href="https://music.youtube.com/" target="_blank">YouTube Music</a>
@@ -810,7 +812,7 @@ footer.light-mode {
           <img src="tema3.jpg" alt="Imagen de Tema 3" loading="lazy">
           <h3>Tema 3</h3>
           <p>Plataforma: YouTube</p>
-          <audio controls src="tema3.mp3" style="width:100%; margin-top:10px;"></audio>
+          <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/tema3.ogg" style="width:100%; margin-top:10px;"></audio>
           <button class="toggle-links">Ver Links</button>
           <div class="platform-links">
             <a href="https://music.youtube.com/" target="_blank">YouTube Music</a>
@@ -1278,6 +1280,24 @@ footer.light-mode {
   });
 });
   </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const audioPlayers = document.querySelectorAll(".audio-preview");
+
+    audioPlayers.forEach(player => {
+      player.addEventListener("play", function() {
+        setTimeout(() => {
+          if (!player.paused) {
+            player.pause();
+            player.currentTime = 0; // Reinicia la canción al inicio
+          }
+        }, 60000); // 60000ms = 1 minuto
+      });
+    });
+  });
+</script>
+
 
 </body>
 </html>
