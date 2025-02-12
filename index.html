@@ -10,576 +10,650 @@
   <!-- Íconos de Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    /* ===============================
-       Variables para tamaños tipográficos uniformes
-    ================================ */
-    :root {
-      --h1-size: 2.5rem;
-      --h2-size: 2rem;
-      --h3-size: 1.5rem;
-      --body-font-size: 1rem;
-    }
-    h1 {
-      font-size: var(--h1-size);
-    }
-    h2 {
-      font-size: var(--h2-size);
-    }
-    h3 {
-      font-size: var(--h3-size);
-    }
-    body, p, li, input, button, a {
-      font-size: var(--body-font-size);
-    }
-    
-    /* Reset y estilos básicos */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    /* Fuente y estilos base */
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
-      color: #fff;
-      text-align: center;
-      transition: background 0.5s ease-in-out;
-      line-height: 1.6;
-      overflow-x: hidden;
-      position: relative;
-    }
-    body.light-mode {
-      background: linear-gradient(45deg, #f5f7fa, #c3cfe2) !important;
-      color: #333;
-    }
-    body.light-mode nav ul li a { color: #007BFF; }
-    body.light-mode .theme-toggle { color: #007BFF; }
-    body.light-mode #typewriter { border-right: .15em solid #007BFF; }
-    body.light-mode .song-card audio,
-    body.light-mode .theme-card audio { border: 1px solid #007BFF; }
-    /* Canvas y SVG de fondo */
-    #particleCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -3;
-      pointer-events: none;
-    }
-    #svgOverlay {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: auto;
-      z-index: -2;
-      pointer-events: none;
-    }
-    .wave { fill: rgba(255, 255, 255, 0.25); }
-    .wave.wave1 {
-      animation: waveAnimation1 12s ease-in-out infinite;
-      fill: rgba(255,255,255,0.3);
-    }
-    .wave.wave2 {
-      animation: waveAnimation2 10s ease-in-out infinite;
-      fill: rgba(255,255,255,0.2);
-    }
-    .wave.wave3 {
-      animation: waveAnimation3 14s ease-in-out infinite;
-      fill: rgba(255,255,255,0.15);
-    }
-    @keyframes waveAnimation1 {
-      0% { transform: translateX(0px) translateY(0px); }
-      50% { transform: translateX(-60px) translateY(10px); }
-      100% { transform: translateX(0px) translateY(0px); }
-    }
-    @keyframes waveAnimation2 {
-      0% { transform: translateX(0px) translateY(0px); }
-      50% { transform: translateX(40px) translateY(-10px); }
-      100% { transform: translateX(0px) translateY(0px); }
-    }
-    @keyframes waveAnimation3 {
-      0% { transform: translateX(0px) translateY(0px); }
-      50% { transform: translateX(-30px) translateY(5px); }
-      100% { transform: translateX(0px) translateY(0px); }
-    }
-    /* Cabecera y navegación */
-    header {
-      background: linear-gradient(135deg, rgba(0,4,40,0.8), rgba(0,78,146,0.8));
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header.light-mode { background: rgba(255, 255, 255, 0.9); }
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: auto;
-      width: 100%;
-      position: relative;
-    }
-    .logo { font-size: 1.8em; font-weight: bold; }
-    nav ul { 
-      list-style: none; 
-      display: flex; 
-      gap: 15px;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: #ffcc00;
-      font-size: 1.2em;
-      transition: 0.3s;
-    }
-    nav ul li a:hover { color: #fff; }
-    .theme-toggle, .menu-toggle {
-      background: none;
-      border: none;
-      color: #ffcc00;
-      font-size: 1.5em;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-    .theme-toggle:hover, .menu-toggle:hover { color: #fff; }
-    .menu-toggle { margin-left: 10px; display: none; }
-    /* Contenedor principal y secciones */
-    .container {
-      padding-top: 120px;
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-    }
-    section {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 30px;
-      margin: 30px 0;
-      border-radius: 10px;
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.3s, opacity 0.6s;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    section.visible { opacity: 1; transform: translateY(0); }
-    h1, h2 { margin-bottom: 15px; }
-    p { margin-bottom: 15px; }
-    /* Efecto typewriter */
-    #typewriter {
-      display: inline-block;
-      overflow: hidden;
-      border-right: .15em solid #ffcc00;
-      white-space: nowrap;
-      letter-spacing: .15em;
-      animation: caret 1s steps(1) infinite;
-    }
-    @keyframes caret { 50% { border-color: transparent; } }
-    /* Sección "Sobre Mi" */
-    .about-content {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .about-image {
-      flex: 1 1 300px;
-      max-width: 300px;
-      border-radius: 10px;
-      transition: transform 0.5s;
-    }
-    .about-image:hover { transform: scale(1.05) rotate(2deg); }
-    .about-text { flex: 2 1 400px; text-align: left; }
-    /* Sección "Temas" */
-    #temas { padding: 30px 10px; }
-    #temas h2 { margin-bottom: 20px; }
-    .theme-cards {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-      margin-top: 20px;
-    }
-    .theme-card {
-      flex: none;
-      background: rgba(255,255,255,0.2);
-      border-radius: 10px;
-      padding: 15px;
-      min-width: 200px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      text-align: center;
-      position: relative;
-    }
-    .theme-card img, 
-    .about-image, 
-    .gallery img,
-    .song-card img,
-    #inicio img {
-      width: 100%;
-      border-radius: 10px;
-    }
-    .theme-card h3 { margin: 10px 0; }
-    .theme-card p { font-size: 0.9em; margin: 5px 0; }
-    /* Reproductor de audio en tarjetas de Temas */
-    .theme-card audio {
-      width: 100%;
-      margin-top: 10px;
-    }
-    /* Botón Toggle para Links */
-    .toggle-links {
-      margin-top: 10px;
-      padding: 8px 12px;
-      background: #ffcc00;
-      color: #000;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .toggle-links:hover { background: #e6b800; }
-    .platform-links {
-      margin-top: 10px;
-      display: none;
-      text-align: left;
-    }
-    .platform-links.open { display: block; }
-    .platform-links a {
-      display: block;
-      margin: 5px 0;
-      color: #ffcc00;
-      text-decoration: none;
-      font-size: 0.9em;
-    }
-    .platform-links a:hover { text-decoration: underline; }
-    /* Sección "Mis Canciones Personalizadas" */
-    #canciones { padding: 30px 10px; }
-    #canciones h2 { margin-bottom: 20px; }
-    .song-cards {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-    }
-    .song-card {
-      flex: none;
-      background: rgba(255,255,255,0.2);
-      border-radius: 10px;
-      padding: 15px;
-      min-width: 250px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      text-align: center;
-    }
-    .song-card h3 { margin: 10px 0; }
-    .song-card p { margin: 5px 0 10px; }
-    /* Reproductor de audio en tarjetas de Canciones Personalizadas */
-    .song-card audio {
-      width: 100%;
-      margin-top: 10px;
-    }
-    /* Sección "Servicio" */
-    #servicio {
-      padding: 30px 10px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      margin-bottom: 40px;
-    }
-    #servicio h2 {
-      text-align: center;
-      font-size: 24px;
-      margin-bottom: 15px;
-    }
-    #servicio p {
-      text-align: center;
-      font-size: 16px;
-      margin-bottom: 15px;
-    }
-    #servicio ul.service-list {
-      list-style: none;
-      padding: 0;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    #servicio ul.service-list li {
-      margin-bottom: 10px;
-      font-size: 16px;
-      line-height: 1.5;
-    }
-    #servicio ul.service-list li i {
-      color: #ffcc00;
-      margin-right: 10px;
-    }
-    #servicio .service-note {
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-      color: #ffcc00;
-      margin-top: 20px;
-    }
-    /* Sección "Precios" (movida aquí) */
-    #precios {
-      padding: 30px 10px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      margin-bottom: 40px;
-    }
-    #precios h2 {
-      text-align: center;
-      font-size: 30px;
-      color: #ffcc00;
-      margin-bottom: 20px;
-    }
-    #precios p {
-      text-align: center;
-      font-size: 20px;
-      margin-bottom: 30px;
-      color: #fff;
-    }
-    .price-options {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      gap: 20px;
-    }
-    .price-option {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 20px;
-      border-radius: 10px;
-      flex: 1 1 250px;
-      max-width: 300px;
-      text-align: center;
-      color: #fff;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-    }
-    .price-option h3 {
-      font-size: 24px;
-      margin-bottom: 10px;
-      color: #ffcc00;
-    }
-    .price-option p {
-      font-size: 20px;
-      line-height: 1.5;
-    }
-    /* Sección "Personaliza tu Música" */
-    #personalizacion {
-      padding: 30px 10px;
-    }
-    #personalizacion h2 {
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    #personalizacion form p {
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-    #personalizacion form div.plan-field label {
+    /* =================================================
+   VARIABLES & RESET
+================================================= */
+:root {
+  /* Tipografía */
+  --h1-size: 2.5rem;
+  --h2-size: 2rem;
+  --h3-size: 1.5rem;
+  --body-font-size: 1rem;
+
+  /* Colores */
+  --color-primary: #ffcc00;
+  --color-secondary: #fff;
+  --color-bg-dark: #0f2027;
+  --color-bg-dark-alt: #203a43;
+  --color-bg-dark-alt2: #2c5364;
+  --color-bg-light: #f5f7fa;
+  --color-bg-light-alt: #c3cfe2;
+  --color-text-dark: #333;
+
+  /* Otros */
+  --transition-speed: 0.3s;
+  --border-radius: 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =================================================
+   BASE & TIPOGRAFÍA
+================================================= */
+html {
+  font-size: 16px;
+}
+
+body, p, li, input, button, a {
+  font-size: var(--body-font-size);
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(45deg, var(--color-bg-dark), var(--color-bg-dark-alt), var(--color-bg-dark-alt2));
+  color: var(--color-secondary);
+  text-align: center;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  transition: background 0.5s ease-in-out;
+}
+
+/* Modo Claro */
+body.light-mode {
+  background: linear-gradient(45deg, var(--color-bg-light), var(--color-bg-light-alt)) !important;
+  color: var(--color-text-dark);
+}
+
+/* Tipografía y márgenes */
+h1 { font-size: var(--h1-size); margin-bottom: 15px; }
+h2 { font-size: var(--h2-size); margin-bottom: 15px; }
+h3 { font-size: var(--h3-size); margin-bottom: 10px; }
+
+a {
+  text-decoration: none;
+  color: var(--color-primary);
+  transition: color var(--transition-speed);
+}
+a:hover { color: var(--color-secondary); }
+
+/* =================================================
+   COMPONENTES DE FONDO: CANVAS & SVG
+================================================= */
+#particleCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -3;
+  pointer-events: none;
+}
+
+#svgOverlay {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Ondas SVG */
+.wave { fill: rgba(255, 255, 255, 0.25); }
+.wave.wave1 {
+  animation: waveAnimation1 12s ease-in-out infinite;
+  fill: rgba(255,255,255,0.3);
+}
+.wave.wave2 {
+  animation: waveAnimation2 10s ease-in-out infinite;
+  fill: rgba(255,255,255,0.2);
+}
+.wave.wave3 {
+  animation: waveAnimation3 14s ease-in-out infinite;
+  fill: rgba(255,255,255,0.15);
+}
+
+@keyframes waveAnimation1 {
+  0% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(-60px) translateY(10px); }
+  100% { transform: translateX(0) translateY(0); }
+}
+@keyframes waveAnimation2 {
+  0% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(40px) translateY(-10px); }
+  100% { transform: translateX(0) translateY(0); }
+}
+@keyframes waveAnimation3 {
+  0% { transform: translateX(0) translateY(0); }
+  50% { transform: translateX(-30px) translateY(5px); }
+  100% { transform: translateX(0) translateY(0); }
+}
+
+/* =================================================
+   CABECERA Y NAVEGACIÓN
+================================================= */
+header {
+  background: linear-gradient(135deg, rgba(0,4,40,0.8), rgba(0,78,146,0.8));
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header.light-mode {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  width: 100%;
+  position: relative;
+}
+
+.logo {
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+nav ul li a {
+  font-size: 1.2em;
+  transition: color var(--transition-speed);
+}
+nav ul li a:hover { color: var(--color-secondary); }
+
+/* Botones de navegación */
+.theme-toggle, .menu-toggle {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: color var(--transition-speed);
+}
+.theme-toggle:hover, .menu-toggle:hover { color: var(--color-secondary); }
+.menu-toggle { margin-left: 10px; display: none; }
+
+/* =================================================
+   CONTENEDOR PRINCIPAL Y SECCIONES
+================================================= */
+.container {
+  padding-top: 120px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Animación en secciones */
+section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  margin: 30px 0;
+  border-radius: var(--border-radius);
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+  transition: transform 0.3s, opacity 0.6s;
+  opacity: 0;
+  transform: translateY(20px);
+}
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =================================================
+   EFECTO TYPEWRITER
+================================================= */
+#typewriter {
+  display: inline-block;
+  overflow: hidden;
+  border-right: 0.15em solid var(--color-primary);
+  white-space: nowrap;
+  letter-spacing: 0.15em;
+  animation: caret 1s steps(1) infinite;
+}
+@keyframes caret {
+  50% { border-color: transparent; }
+}
+
+/* =================================================
+   COMPONENTES DE SECCIONES
+================================================= */
+
+/* Sección "Sobre Mi" */
+.about-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.about-image {
+  flex: 1 1 300px;
+  max-width: 300px;
+  border-radius: var(--border-radius);
+  transition: transform 0.5s;
+}
+.about-image:hover { transform: scale(1.05) rotate(2deg); }
+.about-text { flex: 2 1 400px; text-align: left; }
+
+/* Sección "Temas" */
+#temas { padding: 30px 10px; }
+#temas h2 { margin-bottom: 20px; }
+.theme-cards {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  margin-top: 20px;
+}
+.theme-card {
+  flex: none;
+  background: rgba(255,255,255,0.2);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  min-width: 200px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  text-align: center;
+  position: relative;
+}
+.theme-card img {
+  width: 100%;
+  border-radius: var(--border-radius);
+}
+.theme-card h3 { margin: 10px 0; }
+.theme-card p { font-size: 0.9em; margin: 5px 0; }
+.theme-card audio {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Botón Toggle y Links en Temas */
+.toggle-links {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: var(--color-primary);
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background var(--transition-speed);
+}
+.toggle-links:hover { background: #e6b800; }
+.platform-links {
+  margin-top: 10px;
+  display: none;
+  text-align: left;
+}
+.platform-links.open { display: block; }
+.platform-links a {
+  display: block;
+  margin: 5px 0;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 0.9em;
+}
+.platform-links a:hover { text-decoration: underline; }
+
+/* Sección "Mis Canciones Personalizadas" */
+#canciones { padding: 30px 10px; }
+#canciones h2 { margin-bottom: 20px; }
+.song-cards {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+.song-card {
+  flex: none;
+  background: rgba(255,255,255,0.2);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  min-width: 250px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   text-align: center;
 }
-    /* Nuevo campo para elegir el plan */
-    #personalizacion form div.plan-field {
-      margin-bottom: 15px;
-      text-align: left;
-    }
-    #personalizacion form div.plan-field label {
-      display: block;
-      margin-bottom: 5px;
-    }
-    #personalizacion form div.plan-field select {
-      width: 300px;
-      padding: 8px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      margin: 0 auto; 
-      display: block;
-    }
-    #personalizacion form label input[type="checkbox"] {
-      margin-right: 5px;
-    }
-    /* Sección de Términos y Condiciones */
-    #terminos h2 {
-      text-align: center;
-      font-size: 30px;
-      color: #ffcc00;
-      margin-bottom: 20px;
-    }
-    #terminos ul {
-      max-width: 800px;
-      margin: 0 auto;
-      list-style: disc;
-      padding-left: 40px;
-      font-size: 20px;
-      color: #fff;
-      line-height: 1.6;
-    }
-    #terminos li {
-      margin-bottom: 15px;
-    }
-    #terminos .disclaimer {
-      margin-top: 30px;
-      text-align: center;
-      font-size: 18px;
-      color: #ffcc00;
-      font-style: italic;
-    }
-    /* Botón "Volver arriba" con efecto fade */
-    #scrollTopBtn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #ffcc00;
-      color: #000;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 1000;
-      font-size: 18px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s, opacity 0.3s;
-      opacity: 0;
-      pointer-events: none;
-    }
-    #scrollTopBtn.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    #scrollTopBtn:hover { transform: scale(1.1); }
-    /* Footer */
-    footer {
-      margin-top: 20px;
-      background: rgba(0, 0, 0, 0.9);
-      padding: 15px;
-    }
-    footer.light-mode { background: rgba(255, 255, 255, 0.9); }
-    /* Media Queries */
-    @media (max-width: 768px) {
-      nav ul {
-        display: none;
-        flex-direction: column;
-        background: rgba(0,0,0,0.8);
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        border-radius: 5px;
-        padding: 10px;
-      }
-      nav ul.active {
-        display: flex;
-      }
-      nav ul li {
-        margin: 10px 0;
-      }
-      .menu-toggle { display: block; }
-      .about-content { flex-direction: column; }
-      audio { max-width: 100%; }
-    }
-    
-    /* ===============================
-       Chat Bot - Estilos Mejorados y Atractivos
-    ================================ */
-    #chatbot-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 320px;
-      max-height: 400px;
-      background-color: #fff;
-      border-radius: 12px;
-      box-shadow: 0px 6px 12px rgba(0,0,0,0.25);
-      overflow: hidden;
-      font-family: 'Montserrat', sans-serif;
-      z-index: 2000;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s ease;
-    }
-    #chatbot-container:hover {
-      transform: scale(1.02);
-    }
-    /* Inicialmente minimizado: solo se muestra el header */
-    #chatbot-messages, #chatbot-input-container {
-      display: none;
-    }
-    #chatbot-header {
-      background: linear-gradient(135deg, #00aaff, #0066cc);
-      color: #fff;
-      padding: 12px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.3s;
-    }
-    /* Cuando está minimizado, se muestra un mensaje incitante */
-    #chatbot-header.minimized {
-      background: linear-gradient(135deg, #00ccff, #0088cc);
-    }
-    #chatbot-toggle-icon {
-      font-size: 18px;
-    }
-    #chatbot-messages {
-      height: 250px;
-      overflow-y: auto;
-      padding: 10px;
-      background-color: #f0f0f0;
-      color: #333;
-      font-size: 14px;
-      flex-grow: 1;
-    }
-    #chatbot-input-container {
-      display: flex;
-      padding: 10px;
-      background-color: #e0e0e0;
-    }
-    #chatbot-input {
-      flex: 1;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    #chatbot-send {
-      padding: 8px 12px;
-      background-color: #00aaff;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      margin-left: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    #chatbot-send:hover {
-      background-color: #0066cc;
-    }
-    
-    /* Botón flotante para ir al formulario */
-    #floatingButton {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: #00aaff;
-      color: #fff;
-      border: none;
-      padding: 15px 20px;
-      font-size: 18px;
-      font-weight: bold;
-      border-radius: 5px;
-      cursor: pointer;
-      z-index: 1001;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-    #floatingButton:hover {
-      transform: scale(1.05);
-      background: #00aaff;
-    }
+.song-card img {
+  width: 100%;
+  border-radius: var(--border-radius);
+}
+.song-card h3 { margin: 10px 0; }
+.song-card p { margin: 5px 0 10px; }
+.song-card audio {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Sección "Servicio" */
+#servicio {
+  padding: 30px 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  margin-bottom: 40px;
+}
+#servicio h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+#servicio p {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+#servicio ul.service-list {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+#servicio ul.service-list li {
+  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+#servicio ul.service-list li i {
+  color: var(--color-primary);
+  margin-right: 10px;
+}
+#servicio .service-note {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-top: 20px;
+}
+
+/* Sección "Precios" */
+#precios {
+  padding: 30px 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius);
+  margin-bottom: 40px;
+}
+#precios h2 {
+  text-align: center;
+  font-size: 30px;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+}
+#precios p {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 30px;
+  color: var(--color-secondary);
+}
+.price-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+.price-option {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  flex: 1 1 250px;
+  max-width: 300px;
+  text-align: center;
+  color: var(--color-secondary);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+.price-option h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: var(--color-primary);
+}
+.price-option p {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+/* Sección "Personaliza tu Música" */
+#personalizacion {
+  padding: 30px 10px;
+}
+#personalizacion h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+#personalizacion form {
+  max-width: 600px;
+  margin: auto;
+  text-align: left;
+}
+#personalizacion form p {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+#personalizacion form div {
+  margin-bottom: 15px;
+}
+#personalizacion form label {
+  display: block;
+  margin-bottom: 5px;
+}
+#personalizacion form input,
+#personalizacion form textarea,
+#personalizacion form select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+#personalizacion form label input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* Sección "Términos y Condiciones" */
+#terminos {
+  padding: 30px 10px;
+}
+#terminos h2 {
+  text-align: center;
+  font-size: 30px;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+}
+#terminos ul {
+  max-width: 800px;
+  margin: 0 auto;
+  list-style: disc;
+  padding-left: 40px;
+  font-size: 20px;
+  color: var(--color-secondary);
+  line-height: 1.6;
+}
+#terminos li {
+  margin-bottom: 15px;
+}
+#terminos .disclaimer {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 18px;
+  color: var(--color-primary);
+  font-style: italic;
+}
+
+/* =================================================
+   BOTÓN "VOLVER ARRIBA"
+================================================= */
+#scrollTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--color-primary);
+  color: #000;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 18px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform var(--transition-speed), opacity var(--transition-speed);
+  opacity: 0;
+  pointer-events: none;
+}
+#scrollTopBtn.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+#scrollTopBtn:hover { transform: scale(1.1); }
+
+/* =================================================
+   FOOTER
+================================================= */
+footer {
+  margin-top: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 15px;
+}
+footer.light-mode {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* =================================================
+   CHAT BOT
+================================================= */
+#chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 320px;
+  max-height: 400px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 6px 12px rgba(0,0,0,0.25);
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-speed) ease;
+}
+#chatbot-container:hover {
+  transform: scale(1.02);
+}
+/* Estado Minimizado del Chatbot */
+#chatbot-messages,
+#chatbot-input-container {
+  display: none;
+}
+#chatbot-header {
+  background: linear-gradient(135deg, #00aaff, #0066cc);
+  color: #fff;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background var(--transition-speed);
+}
+#chatbot-header.minimized {
+  background: linear-gradient(135deg, #00ccff, #0088cc);
+}
+#chatbot-toggle-icon { font-size: 18px; }
+#chatbot-messages {
+  height: 250px;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 14px;
+  flex-grow: 1;
+}
+#chatbot-input-container {
+  display: flex;
+  padding: 10px;
+  background-color: #e0e0e0;
+}
+#chatbot-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+#chatbot-send {
+  padding: 8px 12px;
+  background-color: #00aaff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  margin-left: 8px;
+  cursor: pointer;
+  transition: background var(--transition-speed);
+}
+#chatbot-send:hover {
+  background-color: #0066cc;
+}
+
+/* =================================================
+   BOTÓN FLOTANTE PARA FORMULARIO
+================================================= */
+#floatingButton {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: #00aaff;
+  color: #fff;
+  border: none;
+  padding: 15px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1001;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform var(--transition-speed) ease, background var(--transition-speed) ease;
+}
+#floatingButton:hover {
+  transform: scale(1.05);
+  background: #00aaff;
+}
+
+/* =================================================
+   MEDIA QUERIES
+================================================= */
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  nav ul.active { display: flex; }
+  nav ul li { margin: 10px 0; }
+  .menu-toggle { display: block; }
+  .about-content { flex-direction: column; }
+  audio { max-width: 100%; }
+}
+
     
   </style>
 </head>
