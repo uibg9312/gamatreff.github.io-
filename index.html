@@ -926,6 +926,14 @@ footer.light-mode {
           <label for="additional_info">Información adicional (lo que consideres relevante):</label>
           <textarea id="additional_info" name="additional_info" rows="3" placeholder="Opcional"></textarea>
         </div>
+        <!-- ... dentro del formulario "personalization-form" justo antes del botón "Enviar" -->
+<div style="margin-bottom: 15px; text-align: left;">
+  <label style="font-size: 1rem; color: var(--color-secondary);">
+    <input type="checkbox" id="terms_confirmation" name="terms_confirmation" required style="margin-right: 5px;">
+    Confirmo que he leído, comprendido y acepto los <a href="#terminos" style="color: var(--color-primary); text-decoration: underline;" target="_blank">Términos y Condiciones</a> del servicio, incluyendo las políticas de pago, reembolsos y derechos de autor que se encuentran al fondo de la página.
+  </label>
+</div>
+
         <button type="submit">Enviar</button>
       </form>
       <!-- Mensaje de instrucciones para la entrega del resultado -->
@@ -941,23 +949,65 @@ footer.light-mode {
     </section>
     
     <!-- Sección de Términos y Condiciones -->
-    <section id="terminos" class="section">
-      <h2>Términos y Condiciones</h2>
-      <ul>
-        <li>El precio final podrá ajustarse en función de las especificaciones y revisiones solicitadas.</li>
-        <li>La canción es de uso personal y no comercial, salvo acuerdo previo.</li>
-        <li>Se requiere un anticipo no superior al 50% para iniciar el proyecto, con el saldo a abonar a la entrega.</li>
-        <li>El tiempo de entrega varía según la opción seleccionada.</li>
-        <li>Las revisiones están limitadas al número estipulado en el paquete elegido.</li>
-        <li>Los precios mencionados corresponden a una canción individual; para la creación de múltiples canciones, se podrá aplicar un descuento.</li>
-        <li>Por motivos relacionados con derechos de autor, no se ofrecen covers.</li>
-        <li>Los derechos de autor se reservan al creador, a menos que se acuerde lo contrario.</li>
-      </ul>
-      <p class="disclaimer">
-        *Estos precios y condiciones están sujetos a cambios sin previo aviso. Contáctame para obtener más detalles o ajustar la propuesta a tus necesidades.
+<section id="terminos" class="section">
+  <details open style="cursor: pointer;">
+    <summary style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+      <h2 style="margin: 0; font-size: 30px; color: var(--color-primary);">Términos y Condiciones</h2>
+      <i class="fas fa-chevron-down"></i>
+    </summary>
+    <div class="terms-content" style="text-align: left; margin-top: 20px; font-size: 20px; color: var(--color-secondary);">
+      <h3>1. Política de Pagos</h3>
+      <p>
+        El cliente deberá realizar el pago por adelantado antes de que inicie la producción de la canción personalizada. Los métodos de pago aceptados son MercadoPago, PayPal y Transferencia Interbancaria.
       </p>
-    </section>
-  </div>
+      
+      <h3>2. Política de No Reembolsos</h3>
+      <p>
+        Dado que cada canción es creada de manera única y personalizada según las especificaciones del cliente, no se realizan reembolsos una vez que el trabajo ha comenzado.
+      </p>
+      <p><strong>Excepciones:</strong></p>
+      <ul>
+        <li>
+          Si el cliente cancela el pedido antes de iniciar la producción, se reembolsará el 80% del monto total, reteniéndose el 20% por costos administrativos y tiempo invertido.
+        </li>
+        <li>
+          No se aceptan devoluciones una vez entregada la canción, al tratarse de un producto digital único y personalizado.
+        </li>
+      </ul>
+      
+      <h3>3. Revisión y Ajustes</h3>
+      <p>
+        Dependiendo del paquete contratado, el cliente podrá solicitar revisiones dentro de los términos especificados. No se realizarán ajustes fuera de los cambios incluidos en cada paquete.
+      </p>
+      
+      <h3>4. Casos de Disputa</h3>
+      <p>
+        En caso de disputa de pago en PayPal o MercadoPago, el cliente deberá contactarnos primero para resolver la situación antes de abrir un caso en la plataforma de pagos. Nos reservamos el derecho de presentar evidencia del trabajo entregado para demostrar que el servicio ha sido completado.
+      </p>
+      
+      <h3>5. Derechos de Autor y Uso</h3>
+      <p>
+        La canción entregada es de uso personal y no puede ser revendida ni utilizada comercialmente sin un acuerdo previo. Nos reservamos los derechos de autor sobre la canción, a menos que se acuerde la cesión total de derechos con un costo adicional.
+      </p>
+      
+      <h3>6. Confidencialidad y Protección de Datos</h3>
+      <p>
+        Toda la información suministrada por el cliente será tratada de forma confidencial y utilizada exclusivamente para la producción de la canción personalizada.
+      </p>
+      
+      <h3>7. Modificaciones y Fuerza Mayor</h3>
+      <p>
+        Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. No seremos responsables de retrasos o incumplimientos causados por eventos de fuerza mayor.
+      </p>
+      
+      <h3>8. Aceptación de los Términos</h3>
+      <p>
+        El envío del formulario implica la aceptación completa e incondicional de estos términos y condiciones.
+      </p>
+    </div>
+  </details>
+</section>
+
   
   <footer id="footer">
     <p>&copy; 2025 GamaTreff. Todos los derechos reservados.</p>
