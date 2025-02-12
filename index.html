@@ -930,12 +930,17 @@ footer.light-mode {
 
         <div style="margin-bottom: 15px; text-align: left;">
   <label style="font-size: 1rem; color: var(--color-secondary);">
-    <input type="checkbox" id="terms_confirmation" name="terms_confirmation" required 
-      style="margin-right: 5px;"
-      oninvalid="this.setCustomValidity('Marca la casilla para continuar')"
-      oninput="this.setCustomValidity('')">
-        Confirmo que he leído, comprendido y acepto los <a href="#terminos" style="color: var(--color-primary); text-decoration: underline;" target="_blank">Términos y Condiciones</a> del servicio, incluyendo las políticas de pago, reembolsos y derechos de autor.
-  </label>
+  <input type="checkbox" id="terms_confirmation" name="terms_confirmation" required 
+         style="margin-right: 5px;"
+         oninvalid="this.setCustomValidity('Marca la casilla para continuar')"
+         oninput="this.setCustomValidity('')">
+  Confirmo que he leído, comprendido y acepto los 
+  <a href="#terminos" style="color: var(--color-primary); text-decoration: underline;"
+     onclick="document.querySelector('#terminos details').setAttribute('open','');">
+    Términos y Condiciones
+  </a>
+  del servicio, incluyendo las políticas de pago, reembolsos y derechos de autor.
+</label>
 </div>
 
         <button type="submit">Enviar</button>
