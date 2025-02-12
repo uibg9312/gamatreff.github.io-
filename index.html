@@ -229,11 +229,7 @@ section.visible {
   border-right: 0.15em solid var(--color-primary);
   white-space: nowrap;
   letter-spacing: 0.15em;
-  animation: caret 1s steps(1) infinite;
-}
-@keyframes caret {
-  50% { border-color: transparent; }
-}
+
 
 /* =================================================
    COMPONENTES DE SECCIONES
@@ -1024,17 +1020,11 @@ footer.light-mode {
     });
     
     // Efecto typewriter
-    const typewriterText = "Bienvenidos a GamaTreff - Música Personalizada";
+    window.addEventListener('load', () => {
     const typewriterElement = document.getElementById('typewriter');
-    let charIndex = 0;
-    function typeWriter() {
-      if (charIndex < typewriterText.length) {
-        typewriterElement.textContent += typewriterText.charAt(charIndex);
-        charIndex++;
-        setTimeout(typeWriter, 100);
-      }
-    }
-    window.addEventListener('load', typeWriter);
+    typewriterElement.textContent = "Bienvenidos a GamaTreff - Música Personalizada";
+    });
+
     
     // Efecto de Partículas Magnéticas
     const canvas = document.getElementById('particleCanvas');
