@@ -860,9 +860,9 @@ footer.light-mode {
  <!-- Bloque adicional para métodos de pago -->
   <div class="payment-methods">
     <h3>Métodos de Pago</h3>
-    <ul class="payment-methods">
-      <li><i class="fab fa-cc-mercadopago"></i> <a href="https://www.mercadopago.com/tu-enlace" target="_blank" rel="noopener">MercadoPago</a></li>
-      <li><i class="fab fa-cc-paypal"></i> <a href="https://www.paypal.com/pay/tu-enlace" target="_blank" rel="noopener">PayPal</a></li>
+    <ul class="payment-list">
+      <li><i class="fab fa-cc-mercadopago"></i> <a href="https://www.mercadopago.com/tu-enlace" target="_blank" rel="noopener noreferrer">MercadoPago</a></li>
+      <li><i class="fab fa-cc-paypal"></i> <a href="https://www.paypal.com/pay/tu-enlace" target="_blank" rel="noopener noreferrer">PayPal</a></li>
       <li>Transferencia Interbancaria</li>
     </ul>
   </div>
@@ -1400,33 +1400,25 @@ function botResponse(userMessage) {
   <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script type="text/javascript">
     (function(){
-      // Inicializa EmailJS con tu User ID (en este caso, se usa el valor proporcionado)
       emailjs.init("g2QrgmDofWM0mBurr");
-    })();
-  </script>
-  
-  <script>
-    // Envío del formulario de personalización con EmailJS, procesando los checkboxes de géneros
-    document.getElementById('personalization-form').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevenir el comportamiento por defecto
+      
+      document.getElementById('personalization-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const checkboxes = document.querySelectorAll('input[name="genres"]:checked');
+        const genresArray = Array.from(checkboxes).map(cb => cb.value);
+        document.getElementById('genres_list').value = genresArray.join(', ');
 
-      // Procesar los checkboxes de géneros y guardar el resultado en el campo oculto "genres_list"
-      const checkboxes = document.querySelectorAll('input[name="genres"]:checked');
-      let genresArray = [];
-      checkboxes.forEach((checkbox) => {
-        genresArray.push(checkbox.value);
+        emailjs.sendForm('service_v1guq8k', 'template_0gwbyg8', this)
+          .then(function() {
+            alert('¡Formulario enviado correctamente! Te contactaremos pronto.');
+            document.getElementById('personalization-form').reset();
+          }, function(error) {
+            console.error('Error:', error);
+            alert('Ocurrió un error al enviar el formulario. Por favor, intenta nuevamente.');
+          });
       });
-      document.getElementById('genres_list').value = genresArray.join(', ');
-
-      // Envía el formulario a través de EmailJS (ajusta los IDs de servicio y plantilla según tus datos)
-      emailjs.sendForm('service_v1guq8k', 'template_0gwbyg8', this)
-        .then(function() {
-          alert('¡Formulario enviado correctamente! Te contactaremos pronto.');
-          document.getElementById('personalization-form').reset();
-        }, function(error) {
-          alert('Ocurrió un error al enviar el formulario: ' + JSON.stringify(error));
-        });
-    });
+    })();
   </script>
 
   <script>
@@ -1455,15 +1447,19 @@ function botResponse(userMessage) {
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const audioPlayers = document.querySelectorAll(".audio-preview");
+    const PREVIEW_DURATION = 60000; // 60 segundos en milisegundos
 
     audioPlayers.forEach(player => {
       player.addEventListener("play", function() {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
           if (!player.paused) {
             player.pause();
-            player.currentTime = 0; // Reinicia la canción al inicio
+            player.currentTime = 0;
           }
-        }, 60000); // 60000ms = 1 minuto
+        }, PREVIEW_DURATION);
+
+        player.addEventListener("pause", () => clearTimeout(timer));
+        player.addEventListener("ended", () => clearTimeout(timer));
       });
     });
   });
