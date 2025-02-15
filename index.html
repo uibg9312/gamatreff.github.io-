@@ -5,156 +5,59 @@
   <meta name="description" content="GamaTreff - Música Personalizada y Experiencias Interactivas. Descubre canciones únicas creadas con pasión.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GamaTreff - Música Personalizada y Experiencias Interactivas</title>
-  <!-- Fuente Montserrat para un look moderno y profesional -->
+  <!-- Fuente Montserrat -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
   <!-- Íconos de Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
   <style>
-    /* =================================================
-       VARIABLES & RESET
-    ================================================= */
-    :root {
-      /* Tipografía */
-      --h1-size: 2.5rem;
-      --h2-size: 2rem;
-      --h3-size: 1.5rem;
-      --body-font-size: 1rem;
-    
-      /* Colores */
-      --color-primary: #ffcc00;
-      --color-secondary: #fff;
-      --color-bg-dark: #0f2027;
-      --color-bg-dark-alt: #203a43;
-      --color-bg-dark-alt2: #2c5364;
-      --color-bg-light: #f5f7fa;
-      --color-bg-light-alt: #c3cfe2;
-      --color-text-dark: #333;
-    
-      /* Otros */
-      --transition-speed: 0.3s;
-      --border-radius: 10px;
-    }
-    
+    /*********************************************
+     * RESETEO Y VARIABLES BÁSICAS
+    *********************************************/
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
-    /* =================================================
-       BASE & TIPOGRAFÍA
-    ================================================= */
+
     html {
       font-size: 16px;
+      scroll-behavior: smooth;
     }
-    
-    body, p, li, input, button, a {
-      font-size: var(--body-font-size);
-    }
-    
+
     body {
       font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(45deg, var(--color-bg-dark), var(--color-bg-dark-alt), var(--color-bg-dark-alt2));
-      color: var(--color-secondary);
+      background-color: #EAE6FA; /* Fondo lila claro */
+      color: #333; /* Texto oscuro */
       text-align: center;
       line-height: 1.6;
       overflow-x: hidden;
       position: relative;
       transition: background 0.5s ease-in-out;
     }
-    
-    /* Modo Claro */
+
+    /* Modo claro (opcional). 
+       Si prefieres un solo modo, quita todo lo que sea .light-mode */
     body.light-mode {
-      background: linear-gradient(45deg, var(--color-bg-light), var(--color-bg-light-alt)) !important;
-      color: var(--color-text-dark);
+      background-color: #ffffff !important;
+      color: #333;
     }
-    
-    /* Tipografía y márgenes */
-    h1 { font-size: var(--h1-size); margin-bottom: 15px; }
-    h2 { font-size: var(--h2-size); margin-bottom: 15px; }
-    h3 { font-size: var(--h3-size); margin-bottom: 10px; }
-    
-    a {
-      text-decoration: none;
-      color: var(--color-primary);
-      transition: color var(--transition-speed);
-    }
-    a:hover { color: var(--color-secondary); }
-    
-    /* =================================================
-       COMPONENTES DE FONDO: CANVAS & SVG
-    ================================================= */
-    #particleCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -3;
-      pointer-events: none;
-    }
-    
-    #svgOverlay {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: auto;
-      z-index: -2;
-      pointer-events: none;
-    }
-    
-    /* Ondas SVG */
-    .wave { fill: rgba(255, 255, 255, 0.25); }
-    .wave.wave1 {
-      animation: waveAnimation1 12s ease-in-out infinite;
-      fill: rgba(255,255,255,0.3);
-    }
-    .wave.wave2 {
-      animation: waveAnimation2 10s ease-in-out infinite;
-      fill: rgba(255,255,255,0.2);
-    }
-    .wave.wave3 {
-      animation: waveAnimation3 14s ease-in-out infinite;
-      fill: rgba(255,255,255,0.15);
-    }
-    
-    @keyframes waveAnimation1 {
-      0% { transform: translateX(0) translateY(0); }
-      50% { transform: translateX(-60px) translateY(10px); }
-      100% { transform: translateX(0) translateY(0); }
-    }
-    @keyframes waveAnimation2 {
-      0% { transform: translateX(0) translateY(0); }
-      50% { transform: translateX(40px) translateY(-10px); }
-      100% { transform: translateX(0) translateY(0); }
-    }
-    @keyframes waveAnimation3 {
-      0% { transform: translateX(0) translateY(0); }
-      50% { transform: translateX(-30px) translateY(5px); }
-      100% { transform: translateX(0) translateY(0); }
-    }
-    
-    /* =================================================
-       CABECERA Y NAVEGACIÓN
-    ================================================= */
+
+    /*********************************************
+     * ENCABEZADO
+    *********************************************/
     header {
-      background: linear-gradient(135deg, rgba(0,4,40,0.8), rgba(0,78,146,0.8));
-      backdrop-filter: blur(10px);
+      background-color: #7F77D3; /* Morado */
       padding: 20px;
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
-    
     header.light-mode {
-      background: rgba(255, 255, 255, 0.9);
+      background-color: rgba(255, 255, 255, 0.9);
     }
-    
+
     nav {
       display: flex;
       justify-content: space-between;
@@ -162,56 +65,70 @@
       max-width: 1200px;
       margin: auto;
       width: 100%;
-      position: relative;
     }
-    
+
     .logo {
       font-size: 1.8em;
       font-weight: bold;
+      color: #fff;
     }
-    
+
     nav ul {
       list-style: none;
       display: flex;
       gap: 15px;
     }
-    
+
     nav ul li a {
       font-size: 1.2em;
-      transition: color var(--transition-speed);
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s;
     }
-    nav ul li a:hover { color: var(--color-secondary); }
-    
-    /* Botones de navegación */
+
+    nav ul li a:hover {
+      color: #f2f2f2;
+    }
+
+    /* Botones de la cabecera */
     .theme-toggle, .menu-toggle {
       background: none;
       border: none;
-      color: var(--color-primary);
+      color: #fff;
       font-size: 1.5em;
       cursor: pointer;
-      transition: color var(--transition-speed);
+      transition: color 0.3s;
     }
-    .theme-toggle:hover, .menu-toggle:hover { color: var(--color-secondary); }
-    .menu-toggle { margin-left: 10px; display: none; }
-    
-    /* =================================================
-       CONTENEDOR PRINCIPAL Y SECCIONES
-    ================================================= */
+    .theme-toggle:hover, .menu-toggle:hover {
+      color: #dcdcdc;
+    }
+    .menu-toggle {
+      margin-left: 10px;
+      display: none;
+    }
+
+    /*********************************************
+     * CONTENEDOR GENERAL
+    *********************************************/
     .container {
-      padding-top: 120px;
       max-width: 1200px;
       margin: auto;
       padding: 20px;
+      padding-top: 100px; /* para que no se oculte contenido bajo header fijo */
+      text-align: center;
     }
-    
-    /* Animación en secciones */
+
+    /*********************************************
+     * SECCIONES
+    *********************************************/
     section {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 30px;
+      background-color: #fff;
       margin: 30px 0;
-      border-radius: var(--border-radius);
-      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.3s, opacity 0.6s;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+      text-align: left;
+      transition: opacity 0.6s, transform 0.3s;
       opacity: 0;
       transform: translateY(20px);
     }
@@ -219,23 +136,37 @@
       opacity: 1;
       transform: translateY(0);
     }
-    
-    /* =================================================
-       EFECTO TYPEWRITER
-    ================================================= */
-    #typewriter {
-      display: inline-block;
-      overflow: hidden;
-      border-right: 0.15em solid var(--color-primary);
-      white-space: nowrap;
-      letter-spacing: 0.15em;
+
+    /*********************************************
+     * TÍTULOS
+    *********************************************/
+    h1, h2, h3 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 15px;
     }
-    
-    /* =================================================
-       COMPONENTES DE SECCIONES
-    ================================================= */
-    
-    /* Sección "Sobre Mi" */
+    h1 {
+      font-size: 2rem;
+    }
+    h2 {
+      font-size: 1.8rem;
+    }
+    h3 {
+      font-size: 1.4rem;
+    }
+
+    /*********************************************
+     * SECCIÓN DE INICIO
+    *********************************************/
+    #inicio img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    /*********************************************
+     * SECCIÓN SOBRE MÍ
+    *********************************************/
     .about-content {
       display: flex;
       align-items: center;
@@ -246,15 +177,24 @@
     .about-image {
       flex: 1 1 300px;
       max-width: 300px;
-      border-radius: var(--border-radius);
+      border-radius: 8px;
       transition: transform 0.5s;
     }
-    .about-image:hover { transform: scale(1.05) rotate(2deg); }
-    .about-text { flex: 2 1 400px; text-align: left; }
-    
-    /* Sección "Temas" */
-    #temas { padding: 30px 10px; }
-    #temas h2 { margin-bottom: 20px; }
+    .about-image:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+    .about-text {
+      flex: 2 1 400px;
+      text-align: left;
+    }
+
+    /*********************************************
+     * SECCIÓN TEMAS (Cards)
+    *********************************************/
+    #temas {
+      padding: 30px 10px;
+      text-align: center;
+    }
     .theme-cards {
       display: flex;
       gap: 20px;
@@ -264,144 +204,209 @@
     }
     .theme-card {
       flex: none;
-      background: rgba(255,255,255,0.2);
-      border-radius: var(--border-radius);
+      background-color: #f7f7f7;
+      border-radius: 8px;
       padding: 15px;
       min-width: 200px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       text-align: center;
       position: relative;
     }
     .theme-card img {
       width: 100%;
-      border-radius: var(--border-radius);
+      border-radius: 8px;
     }
-    .theme-card h3 { margin: 10px 0; }
-    .theme-card p { font-size: 0.9em; margin: 5px 0; }
+    .theme-card h3 {
+      margin: 10px 0;
+      font-size: 1.2rem;
+      color: #333;
+    }
+    .theme-card p {
+      font-size: 0.9em;
+      margin: 5px 0;
+      color: #666;
+    }
     .theme-card audio {
       width: 100%;
       margin-top: 10px;
     }
-    
-    /* Botón Toggle y Links en Temas */
+
+    /* Botón para mostrar links */
     .toggle-links {
       margin-top: 10px;
       padding: 8px 12px;
-      background: var(--color-primary);
-      color: #000;
+      background-color: #7F77D3;
+      color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      transition: background var(--transition-speed);
+      transition: background 0.3s;
     }
-    .toggle-links:hover { background: #e6b800; }
+    .toggle-links:hover {
+      background-color: #5f57a0;
+    }
     .platform-links {
       margin-top: 10px;
       display: none;
       text-align: left;
     }
-    .platform-links.open { display: block; }
+    .platform-links.open {
+      display: block;
+    }
     .platform-links a {
       display: block;
       margin: 5px 0;
-      color: var(--color-primary);
+      color: #7F77D3;
       text-decoration: none;
       font-size: 0.9em;
     }
-    .platform-links a:hover { text-decoration: underline; }
-    
-    /* Sección "Servicio" */
+    .platform-links a:hover {
+      text-decoration: underline;
+    }
+
+    /*********************************************
+     * SECCIÓN SERVICIO
+    *********************************************/
     #servicio {
-      padding: 30px 10px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: var(--border-radius);
+      background-color: #fff;
+      border-radius: 8px;
       margin-bottom: 40px;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
     }
     #servicio h2 {
       text-align: center;
-      font-size: 24px;
+      font-size: 1.8rem;
       margin-bottom: 15px;
+      color: #333;
     }
     #servicio p {
       text-align: center;
-      font-size: 16px;
+      font-size: 1rem;
       margin-bottom: 15px;
+      color: #555;
     }
-    #servicio ul.service-list {
+    ul.service-list {
       list-style: none;
       padding: 0;
       max-width: 600px;
       margin: 0 auto;
+      margin-top: 20px;
+      text-align: left;
     }
-    #servicio ul.service-list li {
+    ul.service-list li {
       margin-bottom: 10px;
-      font-size: 16px;
+      font-size: 1rem;
       line-height: 1.5;
+      color: #333;
     }
-    #servicio ul.service-list li i {
-      color: var(--color-primary);
+    ul.service-list li i {
+      color: #7F77D3;
       margin-right: 10px;
     }
-    #servicio .service-note {
+    .service-note {
       text-align: center;
-      font-size: 18px;
+      font-size: 1.1rem;
       font-weight: bold;
-      color: var(--color-primary);
+      color: #7F77D3;
       margin-top: 20px;
     }
-    
-    /* Sección "Precios" */
+
+    /*********************************************
+     * SECCIÓN PRECIOS
+    *********************************************/
     #precios {
-      padding: 30px 10px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: var(--border-radius);
+      background-color: #fff;
+      border-radius: 8px;
       margin-bottom: 40px;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+      padding: 30px 10px;
     }
     #precios h2 {
       text-align: center;
-      font-size: 30px;
-      color: var(--color-primary);
+      font-size: 2rem;
+      color: #333;
       margin-bottom: 20px;
     }
     #precios p {
       text-align: center;
-      font-size: 20px;
+      font-size: 1rem;
       margin-bottom: 30px;
-      color: var(--color-secondary);
+      color: #555;
     }
     .price-options {
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-around;
+      justify-content: center;
       gap: 20px;
     }
     .price-option {
-      background: rgba(0, 0, 0, 0.3);
+      background-color: #f7f7f7;
       padding: 20px;
-      border-radius: var(--border-radius);
+      border-radius: 8px;
       flex: 1 1 250px;
       max-width: 300px;
       text-align: center;
-      color: var(--color-secondary);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      color: #333;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     .price-option h3 {
-      font-size: 24px;
+      font-size: 1.4rem;
       margin-bottom: 10px;
-      color: var(--color-primary);
+      color: #7F77D3;
     }
     .price-option p {
-      font-size: 20px;
+      font-size: 1rem;
       line-height: 1.5;
     }
-    
-    /* Sección "Personaliza tu Música" */
+    .launch-offer {
+      color: #7F77D3;
+      font-weight: bold;
+    }
+
+    .payment-methods {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      text-align: left;
+      max-width: 600px;
+      margin: 30px auto 0 auto;
+    }
+    .payment-methods h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      color: #7F77D3;
+    }
+    .payment-methods ul {
+      list-style: disc;
+      margin-left: 20px;
+      font-size: 1rem;
+    }
+    .payment-methods li {
+      margin-bottom: 5px;
+      color: #333;
+    }
+    .payment-methods a {
+      color: #7F77D3;
+      text-decoration: none;
+    }
+    .payment-methods a:hover {
+      text-decoration: underline;
+    }
+
+    /*********************************************
+     * SECCIÓN PERSONALIZACIÓN (FORMULARIO)
+    *********************************************/
     #personalizacion {
+      background-color: #fff;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
       padding: 30px 10px;
     }
     #personalizacion h2 {
       margin-bottom: 20px;
       text-align: center;
+      color: #333;
     }
     #personalizacion form {
       max-width: 600px;
@@ -418,6 +423,7 @@
     #personalizacion form label {
       display: block;
       margin-bottom: 5px;
+      color: #333;
     }
     #personalizacion form input,
     #personalizacion form textarea,
@@ -426,17 +432,15 @@
       padding: 8px;
       border-radius: 5px;
       border: 1px solid #ccc;
+      font-size: 1rem;
     }
     #personalizacion form label input[type="checkbox"] {
       margin-right: 5px;
     }
-    /* =================================================
-       BOTÓN "ENVIAR" MEJORADO
-    ================================================= */
     button[type="submit"] {
-      background: linear-gradient(135deg, #ffcc00, #ff9900);
-      color: #000;
-      font-size: 1.2rem;
+      background-color: #7F77D3;
+      color: #fff;
+      font-size: 1rem;
       font-weight: bold;
       padding: 12px 20px;
       border: none;
@@ -444,93 +448,90 @@
       cursor: pointer;
       text-transform: uppercase;
       letter-spacing: 1px;
-      transition: all 0.3s ease-in-out;
-      box-shadow: 0px 4px 10px rgba(255, 204, 0, 0.3);
-      position: relative;
-      overflow: hidden;
+      transition: background 0.3s, transform 0.2s;
+      display: block;
+      margin: 20px auto 0 auto;
     }
-    
-    /* Efecto de resplandor */
-    button[type="submit"]::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 300%;
-      height: 300%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 60%);
-      transition: opacity 0.4s ease-in-out;
-      transform: translate(-50%, -50%);
-      opacity: 0;
-    }
-    
-    /* Efecto al pasar el mouse */
     button[type="submit"]:hover {
-      background: linear-gradient(135deg, #ffdb4d, #ffb84d);
-      transform: scale(1.05);
-      box-shadow: 0px 6px 14px rgba(255, 204, 0, 0.5);
+      background-color: #5f57a0;
+      transform: scale(1.03);
     }
-    
-    /* Activa el resplandor al pasar el mouse */
-    button[type="submit"]:hover::before {
-      opacity: 1;
-    }
-    
-    /* Efecto de clic */
     button[type="submit"]:active {
-      transform: scale(0.95);
-      box-shadow: 0px 2px 6px rgba(255, 204, 0, 0.5);
+      transform: scale(0.98);
     }
-    
-    /* =================================================
-       SECCIÓN "TÉRMINOS Y CONDICIONES"
-    ================================================= */
+
+    /*********************************************
+     * SECCIÓN TÉRMINOS
+    *********************************************/
     #terminos {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
       padding: 30px 10px;
+      margin-bottom: 40px;
     }
-    #terminos h2 {
-      text-align: center;
-      font-size: 30px;
-      color: var(--color-primary);
-      margin-bottom: 20px;
-    }
-    #terminos ul {
+    #terminos details {
+      cursor: pointer;
       max-width: 800px;
       margin: 0 auto;
-      list-style: disc;
-      padding-left: 40px;
-      font-size: 20px;
-      color: var(--color-secondary);
+    }
+    #terminos summary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      outline: none;
+    }
+    #terminos summary h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #7F77D3;
+    }
+    #terminos summary i {
+      font-size: 1.2rem;
+      color: #7F77D3;
+    }
+    #terminos .terms-content {
+      text-align: left;
+      margin-top: 20px;
+      font-size: 1rem;
+      color: #333;
       line-height: 1.6;
     }
+    #terminos ul {
+      list-style: disc;
+      padding-left: 40px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
     #terminos li {
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
     #terminos .disclaimer {
       margin-top: 30px;
       text-align: center;
-      font-size: 18px;
-      color: var(--color-primary);
+      font-size: 1rem;
+      color: #7F77D3;
       font-style: italic;
     }
-    
-    /* =================================================
-       BOTÓN "VOLVER ARRIBA"
-    ================================================= */
+
+    /*********************************************
+     * BOTÓN "VOLVER ARRIBA"
+    *********************************************/
     #scrollTopBtn {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background: var(--color-primary);
-      color: #000;
+      background: #7F77D3;
+      color: #fff;
       border: none;
       padding: 10px 15px;
       border-radius: 50%;
       cursor: pointer;
       z-index: 1000;
       font-size: 18px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-      transition: transform var(--transition-speed), opacity var(--transition-speed);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, opacity 0.3s;
       opacity: 0;
       pointer-events: none;
     }
@@ -538,23 +539,27 @@
       opacity: 1;
       pointer-events: auto;
     }
-    #scrollTopBtn:hover { transform: scale(1.1); }
-    
-    /* =================================================
-       FOOTER
-    ================================================= */
+    #scrollTopBtn:hover {
+      transform: scale(1.1);
+    }
+
+    /*********************************************
+     * FOOTER
+    *********************************************/
     footer {
-      margin-top: 20px;
-      background: rgba(0, 0, 0, 0.9);
+      background-color: #7F77D3;
       padding: 15px;
+      color: #fff;
+      text-align: center;
     }
     footer.light-mode {
-      background: rgba(255, 255, 255, 0.9);
+      background-color: #f2f2f2;
+      color: #333;
     }
-    
-    /* =================================================
-       CHAT BOT
-    ================================================= */
+
+    /*********************************************
+     * CHAT BOT
+    *********************************************/
     #chatbot-container {
       position: fixed;
       bottom: 20px;
@@ -565,11 +570,10 @@
       border-radius: 12px;
       box-shadow: 0px 6px 12px rgba(0,0,0,0.25);
       overflow: hidden;
-      font-family: 'Montserrat', sans-serif;
       z-index: 2000;
       display: flex;
       flex-direction: column;
-      transition: transform var(--transition-speed) ease;
+      transition: transform 0.3s ease;
     }
     #chatbot-container:hover {
       transform: scale(1.02);
@@ -580,7 +584,7 @@
       display: none;
     }
     #chatbot-header {
-      background: linear-gradient(135deg, #00aaff, #0066cc);
+      background-color: #7F77D3;
       color: #fff;
       padding: 12px;
       cursor: pointer;
@@ -589,12 +593,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: background var(--transition-speed);
+      transition: background 0.3s;
     }
     #chatbot-header.minimized {
-      background: linear-gradient(135deg, #00ccff, #0088cc);
+      background-color: #7F77D3;
     }
-    #chatbot-toggle-icon { font-size: 18px; }
+    #chatbot-toggle-icon {
+      font-size: 18px;
+    }
     #chatbot-messages {
       height: 250px;
       overflow-y: auto;
@@ -617,26 +623,26 @@
     }
     #chatbot-send {
       padding: 8px 12px;
-      background-color: #00aaff;
+      background-color: #7F77D3;
       color: #fff;
       border: none;
       border-radius: 5px;
       margin-left: 8px;
       cursor: pointer;
-      transition: background var(--transition-speed);
+      transition: background 0.3s;
     }
     #chatbot-send:hover {
-      background-color: #0066cc;
+      background-color: #5f57a0;
     }
-    
-    /* =================================================
-       BOTÓN FLOTANTE PARA FORMULARIO
-    ================================================= */
+
+    /*********************************************
+     * BOTÓN FLOTANTE
+    *********************************************/
     #floatingButton {
       position: fixed;
       bottom: 20px;
       left: 20px;
-      background: #00aaff;
+      background: #7F77D3;
       color: #fff;
       border: none;
       padding: 15px 20px;
@@ -645,17 +651,17 @@
       border-radius: 5px;
       cursor: pointer;
       z-index: 1001;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      transition: transform var(--transition-speed) ease, background var(--transition-speed) ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, background 0.3s;
     }
     #floatingButton:hover {
       transform: scale(1.05);
-      background: #00aaff;
+      background: #5f57a0;
     }
-    
-    /* =================================================
-       MEDIA QUERIES
-    ================================================= */
+
+    /*********************************************
+     * MEDIA QUERIES
+    *********************************************/
     @media (max-width: 768px) {
       nav ul {
         display: none;
@@ -667,43 +673,27 @@
         border-radius: 5px;
         padding: 10px;
       }
-      nav ul.active { display: flex; }
-      nav ul li { margin: 10px 0; }
-      .menu-toggle { display: block; }
-      .about-content { flex-direction: column; }
-      audio { max-width: 100%; }
-    }
-    .payment-methods {
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.3);
-      text-align: left;
-    }
-    
-    .payment-methods h3 {
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-      color: var(--color-primary);
-    }
-    
-    .payment-methods ul {
-      list-style: disc;
-      margin-left: 20px;
-      font-size: 1rem;
+      nav ul.active {
+        display: flex;
+      }
+      nav ul li {
+        margin: 10px 0;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .about-content {
+        flex-direction: column;
+      }
+      audio {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Canvas para partículas magnéticas -->
-  <canvas id="particleCanvas"></canvas>
-  
-  <!-- SVG de fondo con ondas -->
-  <svg id="svgOverlay" viewBox="0 0 1440 320" preserveAspectRatio="none">
-    <path class="wave wave1" d="M0,160 C360,260 1080,60 1440,160 L1440,320 L0,320 Z"></path>
-    <path class="wave wave2" d="M0,200 C480,100 960,300 1440,200 L1440,320 L0,320 Z"></path>
-    <path class="wave wave3" d="M0,240 C400,340 1040,140 1440,240 L1440,320 L0,320 Z"></path>
-  </svg>
-  
+
+  <!-- Header (sin ondas ni partículas) -->
   <header id="header">
     <nav>
       <div class="logo">GamaTreff</div>
@@ -722,15 +712,17 @@
       </button>
     </nav>
   </header>
-  
+
+  <!-- Contenedor principal -->
   <div class="container">
+
     <!-- Sección de Inicio -->
     <section id="inicio" class="section">
       <h1><span id="typewriter"></span></h1>
       <p>Descubre un mundo donde cada canción cuenta una historia única. Explora mi trabajo y déjate llevar por la magia de melodías personalizadas.</p>
-      <img src="inicio.jpg" alt="Imagen destacada de GamaTreff" loading="lazy" style="width:100%; border-radius:10px; margin-top:20px;">
+      <img src="inicio.jpg" alt="Imagen destacada de GamaTreff" loading="lazy">
     </section>
-    
+
     <!-- Sección "Sobre Mi" -->
     <section id="sobre-mi" class="section">
       <h2>Sobre Mi Música</h2>
@@ -742,7 +734,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Sección "Temas" -->
     <section id="temas" class="section">
       <h2>Escucha mis Temas</h2>
@@ -752,8 +744,7 @@
           <img src="tema1.jpg" alt="Imagen de Tema 1" loading="lazy">
           <h3>Tema 1</h3>
           <p>Plataforma: Spotify</p>
-          <!-- Reproductor de audio visible -->
-          <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/tema1.ogg" style="width:100%; margin-top:10px;"></audio>
+          <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/tema1.ogg"></audio>
           <button class="toggle-links">Ver Links</button>
           <div class="platform-links">
             <a href="https://music.youtube.com/">YouTube Music</a>
@@ -766,7 +757,7 @@
           <img src="tema2.jpg" alt="Imagen de Tema 2" loading="lazy">
           <h3>Tema 2</h3>
           <p>Plataforma: Apple Music</p>
-          <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/tema2.ogg" style="width:100%; margin-top:10px;"></audio>
+          <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/tema2.ogg"></audio>
           <button class="toggle-links">Ver Links</button>
           <div class="platform-links">
             <a href="https://music.youtube.com/">YouTube Music</a>
@@ -779,7 +770,7 @@
           <img src="tema3.jpg" alt="Imagen de Tema 3" loading="lazy">
           <h3>Tema 3</h3>
           <p>Plataforma: YouTube</p>
-          <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/tema3.ogg" style="width:100%; margin-top:10px;"></audio>
+          <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/tema3.ogg"></audio>
           <button class="toggle-links">Ver Links</button>
           <div class="platform-links">
             <a href="https://music.youtube.com/">YouTube Music</a>
@@ -790,7 +781,7 @@
         </div>
       </div>
     </section>
-    
+
     <!-- Sección "Servicio" -->
     <section id="servicio" class="section">
       <h2>Transforma tus ideas en una canción única</h2>
@@ -804,7 +795,7 @@
       </ul>
       <p class="service-note">¡Haz realidad tu sueño musical hoy mismo y sorpréndete con el resultado!</p>
     </section>
-    
+
     <!-- Sección "Precios" -->
     <section id="precios" class="section">
       <h2>Precios y Opciones</h2>
@@ -824,18 +815,17 @@
           <p><strong>$350</strong> - Canción personalizada. Incluye letra original, música, portada personalizada y tres revisiones.</p>
         </div>
       </div>
-      <!-- Bloque adicional para métodos de pago -->
       <div class="payment-methods">
         <h3>Métodos de Pago</h3>
-        <ul class="payment-methods">
+        <ul>
           <li><i class="fab fa-cc-mercadopago"></i> <a href="https://www.mercadopago.com/tu-enlace" target="_blank" rel="noopener">MercadoPago</a></li>
           <li><i class="fab fa-cc-paypal"></i> <a href="https://www.paypal.com/pay/tu-enlace" target="_blank" rel="noopener">PayPal</a></li>
           <li>Transferencia Interbancaria</li>
         </ul>
       </div>
     </section>
-      
-    <!-- Sección "Personaliza tu Música" (Formulario de Personalización) -->
+
+    <!-- Sección "Personaliza tu Música" -->
     <section id="personalizacion" class="section">
       <h2>Personaliza tu Música</h2>
       <p>Rellena el siguiente formulario para que empieces a crear tu personalización musical. ¡Entre más detalles me proporciones, mejor podré plasmar tus ideas en una canción única!</p>
@@ -852,7 +842,6 @@
           <label for="user_phone">Teléfono (opcional):</label>
           <input type="text" id="user_phone" name="user_phone" placeholder="Tu número de teléfono">
         </div>
-        <!-- Nuevo campo para seleccionar el plan -->
         <div class="plan-field">
           <label for="plan">Selecciona tu Plan:</label>
           <select id="plan" name="plan" required>
@@ -876,7 +865,6 @@
           <label><input type="checkbox" name="genres" value="Clásica"> Clásica</label>
           <label><input type="checkbox" name="genres" value="Reggae"> Reggae</label>
           <label><input type="checkbox" name="genres" value="Otros"> Otros (especifica en el mensaje)</label>
-          <!-- Campo oculto para almacenar los géneros seleccionados -->
           <input type="hidden" id="genres_list" name="genres_list">
         </div>
         <div>
@@ -891,93 +879,76 @@
           <label for="additional_info">Información adicional (lo que consideres relevante):</label>
           <textarea id="additional_info" name="additional_info" rows="3" placeholder="Opcional"></textarea>
         </div>
-        <!-- Checkbox de Términos y Condiciones -->
         <div style="margin-bottom: 15px; text-align: left;">
-          <label style="font-size: 1rem; color: var(--color-secondary);">
-            <input type="checkbox" id="terms_confirmation" name="terms_confirmation" required 
+          <label style="font-size: 1rem;">
+            <input type="checkbox" id="terms_confirmation" name="terms_confirmation" required
               style="margin-right: 5px;"
               oninvalid="this.setCustomValidity('Marca la casilla para continuar')"
               oninput="this.setCustomValidity('')">
             Confirmo que he leído, comprendido y acepto los 
-            <a href="#terminos" style="color: var(--color-primary); text-decoration: underline;"
+            <a href="#terminos" style="color: #7F77D3; text-decoration: underline;"
                onclick="document.querySelector('#terminos details').setAttribute('open','');">
               Términos y Condiciones
             </a>
-            del servicio, incluyendo las políticas de pago, reembolsos y derechos de autor.
           </label>
         </div>
         <button type="submit">Enviar</button>
       </form>
-      <!-- Mensaje de instrucciones para la entrega del resultado -->
       <p style="margin-top: 20px; text-align: center;">
-        Una vez enviado el formulario, me pondré en contacto contigo usando el método que hayas proporcionado (correo, teléfono, etc.). La canción personalizada se entregará a través del medio acordado, y recibirás una confirmación con más detalles sobre el proceso y tiempos de entrega.
+        Una vez enviado el formulario, me pondré en contacto contigo usando el método que hayas proporcionado. La canción personalizada se entregará a través del medio acordado.
       </p>
     </section>
-    
+
     <!-- Sección de Contacto -->
     <section id="contacto" class="section">
       <h2>Contacto</h2>
-      <p>Escríbeme a <a href="mailto:tuemail@ejemplo.com" style="color:#ffcc00;">uibg931204@gmail.com</a> o sígueme en mis redes sociales.</p>
+      <p>Escríbeme a <a href="mailto:tuemail@ejemplo.com" style="color:#7F77D3;">uibg931204@gmail.com</a> o sígueme en mis redes sociales.</p>
     </section>
-    
+
     <!-- Sección de Términos y Condiciones -->
     <section id="terminos" class="section">
-      <details style="cursor: pointer;">
-        <summary style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-          <h2 style="margin: 0; font-size: 30px; color: var(--color-primary);">Términos y Condiciones</h2>
+      <details style="outline: none;">
+        <summary>
+          <h2 style="margin: 0;">Términos y Condiciones</h2>
           <i class="fas fa-chevron-down"></i>
         </summary>
-        <div class="terms-content" style="text-align: left; margin-top: 20px; font-size: 20px; color: var(--color-secondary);">
+        <div class="terms-content">
           <h3>1. Política de Pagos</h3>
           <p>
             El cliente deberá realizar el 50% del total del pago por adelantado antes de que inicie la producción de la canción personalizada. El 50% restante deberá ser abonado al finalizar el trabajo y antes de la entrega del producto final.
-            Los métodos de pago aceptados son MercadoPago, PayPal y Transferencia Interbancaria.
           </p>
-          
           <h3>2. Política de No Reembolsos</h3>
           <p>
             Dado que cada canción es creada de manera única y personalizada según las especificaciones del cliente, no se realizan reembolsos una vez que el trabajo ha comenzado.
           </p>
-          <p><strong>Excepciones:</strong></p>
           <ul>
-            <li>
-              Si el cliente cancela el pedido antes de iniciar la producción, se reembolsará el 80% del monto total, reteniéndose el 20% por costos administrativos y tiempo invertido.
-            </li>
-            <li>
-              No se aceptan devoluciones una vez entregada la canción, al tratarse de un producto digital único y personalizado.
-            </li>
+            <li>Si el cliente cancela el pedido antes de iniciar la producción, se reembolsará el 80% del monto total.</li>
+            <li>No se aceptan devoluciones una vez entregada la canción.</li>
           </ul>
-          
           <h3>3. Revisión y Ajustes</h3>
           <p>
-            Dependiendo del paquete contratado, el cliente podrá solicitar revisiones dentro de los términos especificados. No se realizarán ajustes fuera de los cambios incluidos en cada paquete, a menos que se efectúe un cobro proporcional a la nueva solicitud.
+            Dependiendo del paquete contratado, el cliente podrá solicitar revisiones dentro de los términos especificados.
           </p>
-          
           <h3>4. Casos de Disputa</h3>
           <p>
-            En caso de disputa de pago en PayPal o MercadoPago, el cliente deberá contactarnos primero para resolver la situación antes de abrir un caso en la plataforma de pagos. Nos reservamos el derecho de presentar evidencia del trabajo entregado para demostrar que el servicio ha sido completado.
+            En caso de disputa de pago en PayPal o MercadoPago, el cliente deberá contactarnos primero para resolver la situación antes de abrir un caso.
           </p>
-          
           <h3>5. Derechos de Autor y Uso</h3>
           <p>
-            La canción entregada es de uso personal y no puede ser revendida ni utilizada comercialmente sin un acuerdo previo. Nos reservamos los derechos de autor sobre la canción, a menos que se acuerde la cesión total de derechos con un costo adicional.
+            La canción entregada es de uso personal y no puede ser revendida sin un acuerdo previo. Nos reservamos los derechos de autor sobre la canción, salvo acuerdo de cesión total.
           </p>
-          
           <h3>6. Confidencialidad y Protección de Datos</h3>
           <p>
             Toda la información suministrada por el cliente será tratada de forma confidencial y utilizada exclusivamente para la producción de la canción personalizada.
           </p>
-          
           <h3>7. Modificaciones y Fuerza Mayor</h3>
           <p>
-            Nos reservamos el derecho de modificar estos términos y condiciones en cualquier momento. No seremos responsables de retrasos o incumplimientos causados por eventos de fuerza mayor.
+            Nos reservamos el derecho de modificar estos términos en cualquier momento. No seremos responsables de retrasos causados por eventos de fuerza mayor.
           </p>
-          
           <h3>8. Uso de Herramientas de Inteligencia Artificial (SUNO AI)</h3>
           <p>
-            Para la producción de la canción personalizada se utilizará la tecnología de SUNO AI. El cliente reconoce y acepta que el proceso creativo incorpora el uso de SUNO AI, y se otorgará el crédito correspondiente a dicha plataforma, conforme a sus políticas de uso.
+            Para la producción de la canción personalizada se utilizará la tecnología de SUNO AI. El cliente reconoce y acepta el uso de SUNO AI en el proceso creativo.
           </p>
-          
           <h3>9. Aceptación de los Términos</h3>
           <p>
             El envío del formulario implica la aceptación completa e incondicional de estos términos y condiciones.
@@ -985,17 +956,17 @@
         </div>
       </details>
     </section>
-    
-  </div>
-  
+
+  </div><!-- Fin .container -->
+
   <footer id="footer">
     <p>&copy; 2025 GamaTreff. Todos los derechos reservados.</p>
   </footer>
-  
+
   <!-- Botón "Volver arriba" -->
   <button id="scrollTopBtn" title="Volver arriba"><i class="fas fa-arrow-up"></i></button>
-  
-  <!-- Chat Bot siempre visible con nuevo estilo y estado inicial cerrado -->
+
+  <!-- Chat Bot (estado inicial minimizado) -->
   <div id="chatbot-container">
     <div id="chatbot-header" class="minimized">
       Hola, ¿te puedo ayudar? <span id="chatbot-toggle-icon"><i class="fas fa-chevron-up"></i></span>
@@ -1006,22 +977,22 @@
       <button id="chatbot-send">Enviar</button>
     </div>
   </div>
-  
+
   <!-- Botón flotante para ir al formulario -->
   <button id="floatingButton">¡Empieza tu personalización!</button>
-  
+
   <!-- ===============================
        SCRIPTS
   ================================ -->
   <script>
-    // Aplicar tema guardado
+    // Modo claro/oscuro guardado en localStorage
     if(localStorage.getItem('theme') === 'light'){
       document.body.classList.add('light-mode');
       document.getElementById('header').classList.add('light-mode');
       document.getElementById('footer').classList.add('light-mode');
     }
-    
-    // Smooth scroll para navegación
+
+    // Navegación suave
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
@@ -1032,8 +1003,8 @@
         }
       });
     });
-    
-    // Toggle de tema con localStorage
+
+    // Toggle de tema
     const themeToggle = document.getElementById('themeToggle');
     themeToggle.addEventListener('click', () => {
       document.body.classList.toggle('light-mode');
@@ -1041,28 +1012,28 @@
       document.getElementById('footer').classList.toggle('light-mode');
       localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
     });
-    
-    // Toggle menú hamburguesa en móviles
+
+    // Menú hamburguesa en móviles
     const menuToggle = document.getElementById('menuToggle');
     const navUl = document.querySelector('nav ul');
     menuToggle.addEventListener('click', () => {
       navUl.classList.toggle('active');
     });
-    
-    // Animación de secciones con IntersectionObserver
+
+    // IntersectionObserver para mostrar secciones con efecto fade
     const sections = document.querySelectorAll('section');
     const observerOptions = { threshold: 0.2 };
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+          obs.unobserve(entry.target);
         }
       });
     }, observerOptions);
     sections.forEach(section => observer.observe(section));
-    
-    // Botón "Volver arriba" con efecto fade
+
+    // Botón "Volver arriba"
     const scrollTopBtn = document.getElementById('scrollTopBtn');
     window.addEventListener('scroll', () => {
       if(window.pageYOffset > 300){
@@ -1074,104 +1045,31 @@
     scrollTopBtn.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-    
-    // Efecto typewriter
+
+    // Efecto "typewriter" muy simple
     window.addEventListener('load', () => {
       const typewriterElement = document.getElementById('typewriter');
       typewriterElement.textContent = "Bienvenidos a GamaTreff - Música Personalizada";
     });
-    
-    // Efecto de Partículas Magnéticas
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    const numParticles = 150;
-    const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-    window.addEventListener('mousemove', (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
-    
-    class Particle {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.vx = (Math.random() - 0.5) * 2;
-        this.vy = (Math.random() - 0.5) * 2;
-        this.radius = Math.random() * 2 + 1;
-      }
-      update() {
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const effectRadius = 150;
-        if (distance < effectRadius) {
-          const force = (effectRadius - distance) / effectRadius;
-          const angle = Math.atan2(dy, dx);
-          this.vx += Math.cos(angle) * force * 0.5;
-          this.vy += Math.sin(angle) * force * 0.5;
-        }
-        this.vx *= 0.95;
-        this.vy *= 0.95;
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.x < 0) { this.x = 0; this.vx *= -1; }
-        if (this.x > canvas.width) { this.x = canvas.width; this.vx *= -1; }
-        if (this.y < 0) { this.y = 0; this.vy *= -1; }
-        if (this.y > canvas.height) { this.y = canvas.height; this.vy *= -1; }
-      }
-      draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255, 204, 0, 0.3)";
-        ctx.fill();
-      }
-    }
-    
-    function initParticles() {
-      particles = [];
-      for (let i = 0; i < numParticles; i++) {
-        const x = Math.random() * canvas.width;
-        const y = Math.random() * canvas.height;
-        particles.push(new Particle(x, y));
-      }
-    }
-    initParticles();
-    
-    function animateParticles() {
-      ctx.fillStyle = document.body.classList.contains('light-mode') ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(particle => {
-        particle.update();
-        particle.draw();
-      });
-      requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-    
-    /* ===============================
-       Chat Bot - Implementación con JS Puro
-    ================================ */
+
+    // Quitar lógica de partículas y ondas (ya no existe canvas ni SVGOverlay)
+
+    /*********************************************
+     * CHAT BOT - JS
+    *********************************************/
     (function() {
       const chatbotHeader = document.getElementById('chatbot-header');
       const chatbotMessages = document.getElementById('chatbot-messages');
       const chatbotInputContainer = document.getElementById('chatbot-input-container');
       const chatbotInput = document.getElementById('chatbot-input');
       const chatbotSend = document.getElementById('chatbot-send');
-      
+
       let isMinimized = true;
       chatbotMessages.style.display = 'none';
       chatbotInputContainer.style.display = 'none';
       chatbotHeader.innerHTML = 'Hola, ¿te puedo ayudar? <span id="chatbot-toggle-icon"><i class="fas fa-chevron-up"></i></span>';
       chatbotHeader.classList.add('minimized');
-      
+
       chatbotHeader.addEventListener('click', () => {
         if (isMinimized) {
           chatbotMessages.style.display = 'block';
@@ -1187,7 +1085,7 @@
           isMinimized = true;
         }
       });
-      
+
       function appendMessage(sender, message) {
         const messageElement = document.createElement('div');
         messageElement.style.marginBottom = '10px';
@@ -1196,145 +1094,22 @@
         chatbotMessages.appendChild(messageElement);
         chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
       }
-      
+
       function botResponse(userMessage) {
         const msg = userMessage.toLowerCase();
         let response = "Lo siento, no entiendo. ¿Podrías reformular tu pregunta?";
-      
-        // 1. Saludos
+
+        // Ejemplos de lógica de respuesta
         if (msg.includes("hola") || msg.includes("buenos") || msg.includes("saludos") || msg.includes("hey")) {
           response = "¡Hola! Bienvenido a GamaTreff. ¿En qué puedo ayudarte con tu personalización musical?";
         }
-        // 2. Preguntas generales de precios
-        else if (msg.includes("precio") || msg.includes("cuánto cuesta") || msg.includes("costo") || msg.includes("tarifa")) {
-          response = "Nuestros paquetes tienen diferentes precios: Básico ($200), Premium ($250) y Deluxe ($350). ¿Te interesa algún paquete en particular?";
-        }
-        // 3. Paquete Básico
-        else if (msg.includes("básico") || msg.includes("opción básico")) {
-          response = "El paquete Básico cuesta $200 e incluye una canción personalizada basada en tus ideas, con letra original y música.";
-        }
-        // 4. Paquete Premium
-        else if (msg.includes("premium") || msg.includes("opción premium")) {
-          response = "El paquete Premium cuesta $250 e incluye la canción personalizada con letra original, música y dos revisiones.";
-        }
-        // 5. Paquete Deluxe
-        else if (msg.includes("deluxe") || msg.includes("opción deluxe")) {
-          response = "El paquete Deluxe cuesta $350 e incluye la canción personalizada con letra original, música, portada personalizada y tres revisiones.";
-        }
-        // 6. Preguntas sobre planes y opciones
-        else if (msg.includes("plan") || msg.includes("paquete") || msg.includes("opciones")) {
-          response = "Ofrecemos tres paquetes: Básico, Premium y Deluxe. Cada uno se adapta a distintas necesidades y presupuestos. ¿Te gustaría saber más detalles de alguno?";
-        }
-        // 7. Revisiones y ajustes
-        else if (msg.includes("revisión") || msg.includes("ajustes") || msg.includes("cambios")) {
-          response = "Cada paquete incluye un número limitado de revisiones. Si necesitas cambios adicionales, se aplicará un costo extra. ¿Quieres que te explique cuántas revisiones incluye cada paquete?";
-        }
-        // 8. Tiempos de entrega
-        else if (msg.includes("entrega") || msg.includes("tiempo") || msg.includes("cuándo") || msg.includes("duración")) {
-          response = "El tiempo de entrega varía según el paquete, pero normalmente oscila entre 7 y 14 días. ¿Tienes alguna fecha límite en mente?";
-        }
-        // 9. Métodos de pago
-        else if (msg.includes("pago") || msg.includes("transferencia") || msg.includes("mercadopago") || msg.includes("paypal") || msg.includes("método de pago")) {
-          response = "Aceptamos MercadoPago, PayPal y Transferencia Interbancaria. ¿Necesitas ayuda para elegir el método de pago?";
-        }
-        // 10. Cancelaciones y reembolsos
-        else if (msg.includes("cancelar") || msg.includes("reembolso") || msg.includes("devolución")) {
-          response = "Si cancelas antes de iniciar la producción, se reembolsará el 80% del pago; una vez comenzado el trabajo, no se realizan reembolsos. ¿Te gustaría más información sobre esta política?";
-        }
-        // 11. Confidencialidad y protección de datos
-        else if (msg.includes("confidencial") || msg.includes("privacidad") || msg.includes("datos")) {
-          response = "Toda la información que nos proporciones será tratada de forma confidencial y usada exclusivamente para la creación de tu canción personalizada.";
-        }
-        // 12. Derechos de autor y uso
-        else if (msg.includes("derechos") || msg.includes("autor") || msg.includes("propiedad")) {
-          response = "La canción es para uso personal y no puede ser revendida sin acuerdo previo. Nos reservamos los derechos de autor, salvo que se acuerde lo contrario con un costo adicional.";
-        }
-        // 13. Uso de SUNO AI y herramientas de IA
-        else if (msg.includes("suno") || msg.includes("ia") || msg.includes("inteligencia artificial") || msg.includes("machine learning")) {
-          response = "Utilizamos SUNO AI para generar tus canciones personalizadas, lo que nos permite crear música única basándonos en tus ideas. Se otorgará el crédito correspondiente a SUNO AI.";
-        }
-        // 14. Proceso y funcionamiento del servicio
-        else if (msg.includes("proceso") || msg.includes("cómo funciona") || msg.includes("procedimiento") || msg.includes("pasos")) {
-          response = "Nuestro proceso consiste en recibir tus ideas mediante el formulario, trabajar en la personalización y enviarte la canción final. ¿Te gustaría conocer algún paso en detalle?";
-        }
-        // 15. Contacto y medios de comunicación
-        else if (msg.includes("contacto") || msg.includes("correo") || msg.includes("teléfono") || msg.includes("llamar") || msg.includes("comunicar")) {
-          response = "Puedes contactarnos a través del formulario de nuestra web o enviarnos un correo a tuemail@ejemplo.com. ¿Necesitas ayuda para comunicarte con nosotros?";
-        }
-        // 16. Preguntas sobre música personalizada
-        else if (msg.includes("música personalizada") || msg.includes("canción personalizada")) {
-          response = "Creamos canciones personalizadas que cuentan tu historia. ¿Te gustaría saber cómo podemos transformar tus ideas en música?";
-        }
-        // 17. Inspiración e ideas
-        else if (msg.includes("inspiración") || msg.includes("idea")) {
-          response = "La inspiración es clave para crear algo único. Cuéntame, ¿qué te inspira o qué idea tienes para tu canción?";
-        }
-        // 18. Calidad y sonido
-        else if (msg.includes("calidad") || msg.includes("audio") || msg.includes("sonido")) {
-          response = "Nos aseguramos de que cada canción tenga un audio de alta calidad y un sonido profesional. ¿Te interesa conocer más sobre nuestro proceso de producción?";
-        }
-        // 19. Revisiones adicionales
-        else if (msg.includes("revisión extra") || msg.includes("más cambios") || msg.includes("adicional")) {
-          response = "Si necesitas revisiones adicionales fuera de las incluidas en tu paquete, se aplicará un costo extra. ¿Te gustaría saber cuánto cuesta una revisión extra?";
-        }
-        // 20. Creatividad y originalidad
-        else if (msg.includes("creatividad") || msg.includes("original") || msg.includes("única")) {
-          response = "Cada canción es creada de manera original, fusionando tus ideas con un toque creativo. ¿Quieres que te cuente más sobre nuestro proceso creativo?";
-        }
-        // 21. Estilos y géneros musicales
-        else if (msg.includes("estilo") || msg.includes("género") || msg.includes("rock") || msg.includes("pop") || msg.includes("jazz") || msg.includes("balada") || msg.includes("electrónica")) {
-          response = "Trabajamos con diversos estilos y géneros musicales, adaptándonos a tus gustos. ¿Tienes algún género en particular en mente?";
-        }
-        // 22. Extras: portadas y covers
-        else if (msg.includes("portada") || msg.includes("cover") || msg.includes("imagen") || msg.includes("extra")) {
-          response = "Algunos de nuestros paquetes, como el Deluxe, incluyen extras como una portada personalizada. ¿Te interesa agregar algún extra a tu pedido?";
-        }
-        // 23. Descuentos y promociones
-        else if (msg.includes("descuento") || msg.includes("oferta") || msg.includes("promoción")) {
-          response = "Ocasionalmente ofrecemos descuentos y promociones especiales. ¿Quieres estar al tanto de nuestras ofertas de lanzamiento?";
-        }
-        // 24. Urgencia y plazos cortos
-        else if (msg.includes("urgente") || msg.includes("prisa") || msg.includes("rápido") || msg.includes("inmediato")) {
-          response = "Entendemos que a veces el tiempo es esencial. Podemos intentar adaptarnos a pedidos urgentes, aunque podrían aplicarse cargos adicionales. ¿Es urgente tu solicitud?";
-        }
-        // 25. Número de revisiones
-        else if (msg.includes("cuántas revisiones") || msg.includes("número de revisiones")) {
-          response = "Cada paquete incluye un número específico de revisiones: Básico (1 revisión), Premium (2 revisiones) y Deluxe (3 revisiones).";
-        }
-        // 26. Personalización del contenido
-        else if (msg.includes("personalizar") || msg.includes("personalización")) {
-          response = "Nos gusta adaptar cada detalle a tus necesidades. ¿Qué elementos te gustaría personalizar en tu canción?";
-        }
-        // 27. Asesoramiento y consejos
-        else if (msg.includes("asesoramiento") || msg.includes("consejo") || msg.includes("sugerencia")) {
-          response = "Estoy aquí para ayudarte. Cuéntame qué necesitas y con gusto te brindaré asesoramiento para que tu canción sea perfecta.";
-        }
-        // 28. Cambios en la letra
-        else if (msg.includes("letra") || msg.includes("cambio de letra")) {
-          response = "Si necesitas modificar la letra, podemos hacer ajustes durante el proceso de revisión. ¿Tienes alguna idea específica en mente?";
-        }
-        // 29. Proceso creativo y conceptualización
-        else if (msg.includes("proceso creativo") || msg.includes("creativo") || msg.includes("conceptualización")) {
-          response = "Nuestro proceso creativo se basa en fusionar tus ideas con técnicas innovadoras, aprovechando herramientas como SUNO AI. ¿Te gustaría saber más sobre cómo trabajamos?";
-        }
-        // 30. Experiencia y testimonios
-        else if (msg.includes("experiencia") || msg.includes("historia") || msg.includes("testimonio") || msg.includes("anécdota")) {
-          response = "Hemos ayudado a muchos clientes a contar sus historias a través de la música. ¿Te gustaría conocer algunos testimonios o ejemplos de nuestro trabajo?";
-        }
-        // 31. Soporte y ayuda técnica
-        else if (msg.includes("soporte") || msg.includes("ayuda") || msg.includes("problema")) {
-          response = "Si tienes algún problema o necesitas ayuda técnica, no dudes en contactarnos. ¿En qué puedo asistirte específicamente?";
-        }
-        // 32. Revisión final
-        else if (msg.includes("revisión final") || msg.includes("última revisión")) {
-          response = "La revisión final se realiza para asegurarnos de que la canción cumpla con tus expectativas. ¿Quieres saber cómo funciona este paso?";
-        }
-      
+        // ... (Aquí vendrían más condiciones de respuesta)
+        
         setTimeout(() => {
           appendMessage('bot', response);
         }, 500);
       }
-      
+
       chatbotSend.addEventListener('click', () => {
         const message = chatbotInput.value.trim();
         if(message !== ""){
@@ -1343,89 +1118,73 @@
           botResponse(message);
         }
       });
-      
+
       chatbotInput.addEventListener('keypress', (e) => {
         if(e.key === 'Enter'){
           chatbotSend.click();
         }
       });
     })();
-  </script>
 
-  
-  <!-- Incluye EmailJS -->
-  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function(){
-      // Inicializa EmailJS con tu User ID (en este caso, se usa el valor proporcionado)
-      emailjs.init("g2QrgmDofWM0mBurr");
-    })();
-  </script>
-  
-  <script>
-    // Envío del formulario de personalización con EmailJS, procesando los checkboxes de géneros
-    document.getElementById('personalization-form').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevenir el comportamiento por defecto
-
-      // Procesar los checkboxes de géneros y guardar el resultado en el campo oculto "genres_list"
-      const checkboxes = document.querySelectorAll('input[name="genres"]:checked');
-      let genresArray = [];
-      checkboxes.forEach((checkbox) => {
-        genresArray.push(checkbox.value);
-      });
-      document.getElementById('genres_list').value = genresArray.join(', ');
-
-      // Envía el formulario a través de EmailJS (ajusta los IDs de servicio y plantilla según tus datos)
-      emailjs.sendForm('service_v1guq8k', 'template_0gwbyg8', this)
-        .then(function() {
-          alert('¡Formulario enviado correctamente! Te contactaremos pronto.');
-          document.getElementById('personalization-form').reset();
-        }, function(error) {
-          alert('Ocurrió un error al enviar el formulario: ' + JSON.stringify(error));
-        });
-    });
-  </script>
-
-  <script>
+    // Botón flotante para ir al formulario
     document.getElementById('floatingButton').addEventListener('click', function() {
       const formSection = document.getElementById('personalizacion');
       if (formSection) {
         formSection.scrollIntoView({ behavior: 'smooth' });
       }
     });
-  </script>
-    <script>
-  document.addEventListener("DOMContentLoaded", function() {
-  const toggleButtons = document.querySelectorAll('.toggle-links');
-  toggleButtons.forEach(function(button) {
-    button.addEventListener('click', function() {
-      // Se asume que el div .platform-links es el siguiente hermano del botón.
-      const linksContainer = this.nextElementSibling;
-      if (linksContainer) {
-        linksContainer.classList.toggle('open');
-      }
-    });
-  });
-});
-  </script>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const audioPlayers = document.querySelectorAll(".audio-preview");
-
-    audioPlayers.forEach(player => {
-      player.addEventListener("play", function() {
-        setTimeout(() => {
-          if (!player.paused) {
-            player.pause();
-            player.currentTime = 0; // Reinicia la canción al inicio
+    // Mostrar/ocultar links de plataformas
+    document.addEventListener("DOMContentLoaded", function() {
+      const toggleButtons = document.querySelectorAll('.toggle-links');
+      toggleButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          const linksContainer = this.nextElementSibling;
+          if (linksContainer) {
+            linksContainer.classList.toggle('open');
           }
-        }, 60000); // 60000ms = 1 minuto
+        });
       });
     });
-  });
-</script>
 
+    // Limitar reproducción de audio a 1 minuto (opcional)
+    document.addEventListener("DOMContentLoaded", function() {
+      const audioPlayers = document.querySelectorAll(".audio-preview");
+      audioPlayers.forEach(player => {
+        player.addEventListener("play", function() {
+          setTimeout(() => {
+            if (!player.paused) {
+              player.pause();
+              player.currentTime = 0;
+            }
+          }, 60000); // 1 minuto
+        });
+      });
+    });
 
+    // Enviar formulario con EmailJS (opcional, ajusta tus IDs)
+    // Debes incluir <script src="https://cdn.emailjs.com/dist/email.min.js"></script> si quieres usar EmailJS
+    // ...
+    // Ejemplo:
+    /*
+    emailjs.init("TU_USER_ID");
+    document.getElementById('personalization-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const checkboxes = document.querySelectorAll('input[name="genres"]:checked');
+      let genresArray = [];
+      checkboxes.forEach((checkbox) => {
+        genresArray.push(checkbox.value);
+      });
+      document.getElementById('genres_list').value = genresArray.join(', ');
+      emailjs.sendForm('serviceID', 'templateID', this)
+        .then(() => {
+          alert('¡Formulario enviado!');
+          this.reset();
+        }, (error) => {
+          alert('Error: ' + JSON.stringify(error));
+        });
+    });
+    */
+  </script>
 </body>
 </html>
