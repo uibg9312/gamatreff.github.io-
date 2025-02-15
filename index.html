@@ -1162,6 +1162,9 @@
       });
     });
 
+
+  </script>
+
   <!-- Incluye EmailJS -->
   <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script type="text/javascript">
@@ -1169,7 +1172,9 @@
       // Inicializa EmailJS con tu User ID (en este caso, se usa el valor proporcionado)
       emailjs.init("g2QrgmDofWM0mBurr");
     })();
- 
+  </script>
+  
+  <script>
     // Envío del formulario de personalización con EmailJS, procesando los checkboxes de géneros
     document.getElementById('personalization-form').addEventListener('submit', function(event) {
       event.preventDefault(); // Prevenir el comportamiento por defecto
@@ -1191,8 +1196,9 @@
           alert('Ocurrió un error al enviar el formulario: ' + JSON.stringify(error));
         });
     });
- 
-
   </script>
+
+
+  
 </body>
 </html>
