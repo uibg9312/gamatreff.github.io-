@@ -549,33 +549,6 @@
       font-style: italic;
     }
 
-    /*********************************************
-     * BOTÓN "VOLVER ARRIBA"
-    *********************************************/
-    #scrollTopBtn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: var(--primary-color);
-      color: #fff;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 1000;
-      font-size: 18px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, opacity 0.3s;
-      opacity: 0;
-      pointer-events: none;
-    }
-    #scrollTopBtn.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    #scrollTopBtn:hover {
-      transform: scale(1.1);
-    }
 
     /*********************************************
      * FOOTER
@@ -1181,8 +1154,6 @@
     <p>&copy; 2025 GamaTreff. Todos los derechos reservados. | <a href="#" id="footerPrivacyLink" style="color:#fff; text-decoration: underline;">Política de Privacidad</a></p>
   </footer>
 
-  <!-- Botón "Volver arriba" -->
-  <button id="scrollTopBtn" title="Volver arriba"><i class="fas fa-arrow-up"></i></button>
 
   <!-- Chat Bot (estado inicial minimizado) -->
   <div id="chatbot-container">
@@ -1359,18 +1330,6 @@
     }, observerOptions);
     sections.forEach(section => observer.observe(section));
 
-    // Botón "Volver arriba"
-    const scrollTopBtn = document.getElementById('scrollTopBtn');
-    window.addEventListener('scroll', () => {
-      if(window.pageYOffset > 300){
-        scrollTopBtn.classList.add('show');
-      } else {
-        scrollTopBtn.classList.remove('show');
-      }
-    });
-    scrollTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
 
     // Efecto "typewriter" muy simple
     window.addEventListener('load', () => {
