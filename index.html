@@ -711,6 +711,99 @@
       padding-bottom: 80px;
     }
   }
+
+  /* Sección principal */
+.why-gamatreff {
+  background: linear-gradient(120deg, #faf8ff, #efecff); /* Degradado suave */
+  padding: 60px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 40px;
+}
+
+/* Título */
+.why-gamatreff h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Contenedor interno con flexbox */
+.why-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Texto y lista de beneficios */
+.why-text {
+  flex: 1 1 400px; /* Crece hasta 400px mínimo */
+  text-align: left;
+}
+
+/* Lista estilizada */
+.why-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+/* Cada ítem con ícono */
+.why-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #444;
+}
+
+.why-list li i {
+  margin-right: 10px;
+  color: #7F77D3; /* Tu color principal */
+  font-size: 1.3rem;
+}
+
+/* CTA final */
+.cta {
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Imagen */
+.why-image {
+  flex: 1 1 400px; 
+  text-align: center;
+}
+
+.why-image img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+  .why-content {
+    flex-direction: column;
+  }
+  .why-text, .why-image {
+    flex: 1 1 100%;
+  }
+  .why-list li {
+    font-size: 1rem;
+  }
+  .cta {
+    font-size: 1rem;
+  }
+}
+
 </style>
 
 
