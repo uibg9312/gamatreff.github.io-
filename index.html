@@ -1378,27 +1378,28 @@
       const chatbotInput = document.getElementById('chatbot-input');
       const chatbotSend = document.getElementById('chatbot-send');
 
-      let isMinimized = true;
-      chatbotMessages.style.display = 'none';
-      chatbotInputContainer.style.display = 'none';
-      chatbotHeader.innerHTML = 'Hola, ¿te puedo ayudar? <span id="chatbot-toggle-icon"><i class="fas fa-chevron-up"></i></span>';
-      chatbotHeader.classList.add('minimized');
-
-      chatbotHeader.addEventListener('click', () => {
-        if (isMinimized) {
-          chatbotMessages.style.display = 'block';
-          chatbotInputContainer.style.display = 'flex';
-          chatbotHeader.innerHTML = 'Chat Bot <span id="chatbot-toggle-icon"><i class="fas fa-chevron-down"></i></span>';
-          chatbotHeader.classList.remove('minimized');
-          isMinimized = false;
-        } else {
-          chatbotMessages.style.display = 'none';
-          chatbotInputContainer.style.display = 'none';
-          chatbotHeader.innerHTML = 'Hola, ¿te puedo ayudar? <span id="chatbot-toggle-icon"><i class="fas fa-chevron-up"></i></span>';
-          chatbotHeader.classList.add('minimized');
-          isMinimized = true;
-        }
-      });
+    let isMinimized = true;
+    chatbotMessages.style.display = 'none';
+    chatbotInputContainer.style.display = 'none';
+    chatbotHeader.innerHTML = '<span id="chatbot-toggle-icon"><i class="fas fa-chevron-up"></i></span>';
+    chatbotHeader.classList.add('minimized');
+    
+    chatbotHeader.addEventListener('click', () => {
+      if (isMinimized) {
+        chatbotMessages.style.display = 'block';
+        chatbotInputContainer.style.display = 'flex';
+        chatbotHeader.innerHTML = 'Chat Bot <span id="chatbot-toggle-icon"><i class="fas fa-chevron-down"></i></span>';
+        chatbotHeader.classList.remove('minimized');
+        isMinimized = false;
+      } else {
+        chatbotMessages.style.display = 'none';
+        chatbotInputContainer.style.display = 'none';
+        chatbotHeader.innerHTML = '<span id="chatbot-toggle-icon"><i class="fas fa-chevron-up"></i></span>';
+        chatbotHeader.classList.add('minimized');
+        isMinimized = true;
+      }
+    });
+    
 
       function appendMessage(sender, message) {
         const messageElement = document.createElement('div');
