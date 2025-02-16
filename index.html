@@ -856,74 +856,42 @@
       align-items: center;
     }
 
-        
-       /* Sección "Sobre Mi Música" */
+    
+    /*Sobre seccion */
+    
     .about-section {
       background: #fff;
-      padding: 60px 40px; /* Más espacio para una apariencia premium */
-      border-radius: 12px;
-      margin-bottom: 40px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra más elegante */
-      max-width: 1200px;
-      margin: auto;
+      padding: 40px 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     
-    /* Título más llamativo */
     .about-section h2 {
       text-align: center;
-      font-size: 2rem; /* Tamaño más impactante */
-      color: #222; /* Color más oscuro para mejor contraste */
-      font-weight: bold;
+      font-size: 1.8rem;
+      color: #333;
     }
     
-    /* Contenedor principal con Flexbox */
     .about-content {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
       flex-wrap: wrap;
-      margin-top: 30px;
+      gap: 20px;
+      align-items: center;
+      margin-top: 20px;
     }
     
-    /* Imagen con mayor protagonismo */
     .about-image {
-      flex: 1 1 45%; /* Ocupará el 45% del ancho en pantallas grandes */
-      max-width: 450px; /* Tamaño más amplio */
-      border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más fuerte */
-      transition: transform 0.3s ease-in-out;
+      flex: 1 1 300px;
+      max-width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     
-    /* Efecto al pasar el mouse sobre la imagen */
-    .about-image:hover {
-      transform: scale(1.05); /* Aumenta un poco su tamaño */
-    }
-    
-    /* Texto con mejor diseño */
     .about-text {
-      flex: 1 1 50%;
-      color: #444;
-      font-size: 1.1rem;
-      line-height: 1.8;
-      text-align: justify;
-    }
-    
-    /* Responsivo: Ajusta la sección en pantallas pequeñas */
-    @media (max-width: 768px) {
-      .about-content {
-        flex-direction: column;
-        text-align: center;
-      }
-    
-      .about-image {
-        max-width: 80%; /* Reduce tamaño en pantallas pequeñas */
-      }
-    
-      .about-text {
-        text-align: center;
-        font-size: 1rem;
-      }
+      flex: 2 1 400px;
+      color: #555;
+      line-height: 1.6;
     }
 
     
