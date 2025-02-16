@@ -617,20 +617,30 @@
     #chatbot-input-container {
       display: none;
     }
+    /* Estado "normal" (expandido) del encabezado del chatbot */
     #chatbot-header {
       background-color: var(--primary-color);
       color: #fff;
       padding: 12px;
-      cursor: pointer;
       font-size: 16px;
       font-weight: bold;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: background 0.3s;
+      transition: width 0.3s ease;
+      border-radius: 12px 12px 0 0;
+      cursor: pointer;
+      width: 320px; /* Ancho normal cuando está abierto */
     }
+    
+    /* Estado "minimizado": botón angosto para mostrar solo el ícono */
     #chatbot-header.minimized {
-      background-color: var(--primary-color);
+      width: 40px;         /* Se reduce para mostrar solo el ícono */
+      justify-content: center; 
+      padding: 8px;        /* Menos padding para hacerlo compacto */
+      overflow: hidden;    /* Oculta texto sobrante */
+    }
+
     }
     #chatbot-toggle-icon {
       font-size: 18px;
