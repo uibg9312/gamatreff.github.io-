@@ -812,6 +812,42 @@
     }
 
     
+    .hero-section {
+      background: linear-gradient(45deg, #fdfbfb, #ebedee); /* Degradado suave gris claro */
+      padding: 40px 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto 20px; /* Centra y separa el texto de la imagen */
+    }
+    
+    .hero-section h1 {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    
+    .hero-image {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 8px;
+      margin: 0 auto;
+      display: block;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra suave */
+    }
+
+    
   </style>
 </head>
 <body>
@@ -840,14 +876,17 @@
   <div class="container">
 
     <!-- Sección de Inicio -->
-    <section id="inicio" class="section">
-    <h1>Convierte cada momento en música inolvidable</h1>
-    <p>
-      ¡Crea tu canción personalizada con GamaTreff y regala emociones que perduran!
-      Descubre un mundo donde cada melodía cuenta una historia única.
-    </p>
-    <img src="inicio.jpg" alt="Imagen destacada de GamaTreff" loading="lazy">
+    <section id="inicio" class="hero-section">
+      <div class="hero-content">
+        <h1>¡Convierte cada momento en música inolvidable!</h1>
+        <p class="hero-subtitle">
+          Crea tu canción personalizada con GamaTreff y regala emociones que perduran. 
+          Descubre un mundo donde cada melodía cuenta una historia única.
+        </p>
+      </div>
+      <img src="inicio.jpg" alt="Imagen destacada de GamaTreff" class="hero-image">
     </section>
+
 
     <!-- Sección "Sobre Mi" -->
     <section id="sobre-mi" class="section">
