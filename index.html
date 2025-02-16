@@ -792,6 +792,23 @@
         max-width: 100%;
       }
     }
+    /* Ajustes para pantallas pequeñas */
+    @media (max-width: 768px) {
+      /* Botón flotante para ir al formulario */
+      #floatingButton {
+        bottom: 80px; /* Moverlo más arriba */
+        left: 20px;
+      }
+      
+      /* Contenedor del Chatbot */
+      #chatbot-container {
+        bottom: 20px; /* Mantenerlo en la parte de abajo */
+        right: 20px;  /* y a la derecha */
+        width: 280px; /* Opcional: reducir el ancho en móvil */
+      }
+    }
+
+    
   </style>
 </head>
 <body>
