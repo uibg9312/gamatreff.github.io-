@@ -807,6 +807,27 @@
         width: 280px; /* Opcional: reducir el ancho en móvil */
       }
     }
+    @media (max-width: 768px) {
+      /* Botón flotante de personalización */
+      #floatingButton {
+        bottom: 100px; /* Lo subimos más */
+        left: 20px;
+        width: auto;
+        padding: 12px 16px;
+      }
+    
+      /* Contenedor del Chatbot */
+      #chatbot-container {
+        bottom: 20px; /* Lo dejamos en su posición */
+        right: 20px;
+        width: 260px; /* Reducimos el tamaño en móviles */
+      }
+    
+      /* Ajuste para el footer para evitar que lo tapen */
+      footer {
+        padding-bottom: 80px; /* Agregamos espacio extra debajo */
+      }
+    }
 
     
   </style>
