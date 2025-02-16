@@ -44,19 +44,37 @@
       transition: background 0.5s ease-in-out;
     }
 
-      body.light-mode {
-        background-color: #4b3f72 !important; /* Fondo morado oscuro */
-        color: #ddd;
-      }
-      header.light-mode {
-        background: linear-gradient(135deg, #5d4b8d, #483070);
-      }
-      footer.light-mode {
-        background-color: #5d4b8d;
-        color: #ddd;
-      }
-
+    /* Fondo general en modo "light" (oscuro) */
+    body.light-mode {
+      background-color: #3a2f52 !important; /* Un morado oscuro */
+      color: #ddd; /* Texto gris claro */
+    }
     
+    /* Header en modo "light" (oscuro) */
+    header.light-mode {
+      background: linear-gradient(135deg, #5d4b8d, #483070);
+      color: #fff;
+    }
+    
+    /* Footer en modo "light" (oscuro) */
+    footer.light-mode {
+      background-color: #5d4b8d;
+      color: #ddd;
+    }
+    
+    /* Secciones en modo "light" (oscuro) */
+    body.light-mode section {
+      background-color: #4b3f72; /* Un tono ligeramente distinto */
+      color: #fff; /* Texto en blanco para mejor contraste */
+    }
+    
+    /* Tarjetas o contenedores (ej. .theme-card) en modo "light" (oscuro) */
+    body.light-mode .theme-card {
+      background-color: #5d4b8d;
+      color: #fff;
+    }
+    
+        
 
     /*********************************************
      * ENCABEZADO
