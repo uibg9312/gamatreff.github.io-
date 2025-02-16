@@ -812,6 +812,8 @@
     }
 
     
+    /*Hero seccion, inicio*/
+    
     .hero-section {
       background: linear-gradient(45deg, #fdfbfb, #ebedee); /* Degradado suave gris claro */
       padding: 40px 20px;
@@ -845,6 +847,43 @@
       margin: 0 auto;
       display: block;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra suave */
+    }
+
+    /*Sobre seccion */
+    
+    .about-section {
+      background: #fff;
+      padding: 40px 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .about-section h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      color: #333;
+    }
+    
+    .about-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      margin-top: 20px;
+    }
+    
+    .about-image {
+      flex: 1 1 300px;
+      max-width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .about-text {
+      flex: 2 1 400px;
+      color: #555;
+      line-height: 1.6;
     }
 
     
@@ -889,16 +928,23 @@
 
 
     <!-- Sección "Sobre Mi" -->
-    <section id="sobre-mi" class="section">
+    <section id="sobre-mi" class="about-section">
       <h2>Sobre Mi Música</h2>
       <div class="about-content">
-        <img src="sobre-mi.jpg" alt="Imagen personal de Gama" class="about-image" loading="lazy">
+        <img src="sobre-mi.jpg" alt="Imagen personal de Gama" class="about-image">
         <div class="about-text">
-          <p>Cada nota que compongo nace de una historia real, y cada melodía transmite una emoción única. Mi pasión es transformar sentimientos en canciones, ayudando a compartir momentos especiales a través de la música.</p>
-          <p>Ya sea una dedicatoria romántica o un mensaje inspirador, mi objetivo es crear piezas que toquen el corazón. ¿Tienes una historia que contar? ¡Hablemos y hagamos magia juntos!</p>
+          <p>
+            Cada nota que compongo nace de una historia real, y cada melodía transmite una emoción única. 
+            Mi pasión es transformar sentimientos en canciones, ayudando a compartir momentos especiales a través de la música.
+          </p>
+          <p>
+            Ya sea una dedicatoria romántica o un mensaje inspirador, mi objetivo es crear piezas que toquen el corazón. 
+            ¿Tienes una historia que contar? ¡Hablemos y hagamos magia juntos!
+          </p>
         </div>
       </div>
     </section>
+
 
 
     <!-- Sección "Temas" -->
