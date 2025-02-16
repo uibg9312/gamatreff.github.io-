@@ -857,77 +857,112 @@
     }
 
         
-    /* Sección "Sobre Mi Música" */
-    .about-section {
-      background: #fff;
-      padding: 60px 40px; /* Más espacio para una apariencia premium */
+       /* Sección principal */
+    .why-gamatreff {
+      background: linear-gradient(120deg, #faf8ff, #efecff); /* Degradado suave */
+      padding: 60px 20px;
       border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       margin-bottom: 40px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra más elegante */
-      max-width: 1200px;
-      margin: auto;
     }
     
-    /* Título más llamativo */
-    .about-section h2 {
+    /* Título */
+    .why-gamatreff h2 {
       text-align: center;
-      font-size: 2rem; /* Tamaño más impactante */
-      color: #222; /* Color más oscuro para mejor contraste */
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #333;
       font-weight: bold;
     }
     
-    /* Contenedor principal con Flexbox */
-    .about-content {
+    /* Contenedor interno con flexbox */
+    .why-content {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      gap: 40px;
-      flex-wrap: wrap;
-      margin-top: 30px;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
     
-    /* Imagen con mayor protagonismo */
-    .about-image {
-      flex: 1 1 45%; /* Ocupará el 45% del ancho en pantallas grandes */
-      max-width: 450px; /* Tamaño más amplio */
-      border-radius: 12px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más fuerte */
-      transition: transform 0.3s ease-in-out;
+    /* Texto y lista de beneficios */
+    .why-text {
+      flex: 1 1 400px; /* Crece hasta 400px mínimo */
+      text-align: left;
     }
     
-    /* Efecto al pasar el mouse sobre la imagen */
-    .about-image:hover {
-      transform: scale(1.05) rotate(2deg); /* Aumenta un poco su tamaño */
+    /* Lista estilizada */
+    .why-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px 0;
     }
     
-    /* Texto con mejor diseño */
-    .about-text {
-      flex: 1 1 50%;
-      color: #444;
+    /* Cada ítem con ícono */
+    .why-list li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
       font-size: 1.1rem;
-      line-height: 1.8;
-      text-align: justify;
+      color: #444;
     }
     
-    /* Responsivo: Ajusta la sección en pantallas pequeñas */
+    .why-list li i {
+      margin-right: 10px;
+      color: #7F77D3; /* Tu color principal */
+      font-size: 1.3rem;
+    }
+    
+    /* CTA final */
+    .cta {
+      font-size: 1.2rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    
+    /* Imagen */
+    .why-image {
+      flex: 1 1 400px; 
+      text-align: center;
+    }
+    
+    .why-image img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    /* Responsivo para pantallas pequeñas */
     @media (max-width: 768px) {
-      .about-content {
+      .why-content {
         flex-direction: column;
-        text-align: center;
       }
-    
-      .about-image {
-        max-width: 80%; /* Reduce tamaño en pantallas pequeñas */
+      .why-text, .why-image {
+        flex: 1 1 100%;
       }
-    
-      .about-text {
-        text-align: center;
+      .why-list li {
+        font-size: 1rem;
+      }
+      .cta {
         font-size: 1rem;
       }
     }
 
-
-
+    .btn-cta {
+      display: inline-block;
+      background-color: #7F77D3;
+      color: #fff;
+      padding: 10px 20px;
+      margin-left: 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .btn-cta:hover {
+      background-color: #5f57a0;
+    }
+    
 
     
   </style>
@@ -972,23 +1007,38 @@
 
 
     <!-- Sección "¿Por qué GamaTreff?" -->
-    <section id="porquegamatreff" class="about-section">
-      <h1>¿Por qué GamaTreff?</h1>
-      <div class="about-content">
-        <img src="sobremi.jpg" alt="Imagen destacada" class="about-image">
-        <div class="about-text">
-          <p>
-            - Canciones únicas y personalizadas<br>
-            - Historias convertidas en melodías inolvidables<br>
-            - Emociones plasmadas en cada nota
-          </p>
-          <p>
+    <section id="porquegamatreff" class="why-gamatreff"> 
+      <h2>¿Por qué GamaTreff?</h2>
+      <div class="why-content">
+        <!-- Texto con viñetas e íconos -->
+        <div class="why-text">
+          <ul class="why-list">
+            <li><i class="fas fa-microphone-alt"></i> Canciones únicas y personalizadas</li>
+            <li><i class="fas fa-music"></i> Historias convertidas en melodías inolvidables</li>
+            <li><i class="fas fa-heart"></i> Emociones plasmadas en cada nota</li>
+          </ul>
+          <p class="cta">
             ¿Listo para inmortalizar tus recuerdos? 
-            ¡Hablemos y hagamos magia juntos!
+            <strong>¡Hablemos y hagamos magia juntos!</strong>
           </p>
         </div>
+    
+        <!-- Imagen al lado -->
+        <div class="why-image">
+          <img src="tu-imagen.jpg" alt="Equipo de producción musical">
+        </div>
       </div>
+    <p class="cta">
+  ¿Listo para inmortalizar tus recuerdos?
+  <strong>¡Hablemos y hagamos magia juntos!</strong>
+  <a href="#personalizacion" class="btn-cta">¡Empieza tu personalización!</a>
+    </p>
+
+      
     </section>
+
+
+
 
 
 
