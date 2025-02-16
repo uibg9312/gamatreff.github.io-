@@ -11,6 +11,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
   <style>
+    :root {
+      --primary-color: #7F77D3;
+      --secondary-color: #5f57a0;
+      --bg-dark: #EAE6FA;
+      --bg-light: #ffffff;
+      --text-color: #333;
+    }
+    
     /*********************************************
      * RESETEO Y VARIABLES BÁSICAS
     *********************************************/
@@ -27,8 +35,8 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: #EAE6FA; /* Fondo lila claro */
-      color: #333; /* Texto oscuro */
+      background-color: var(--bg-dark); /* Fondo lila claro */
+      color: var(--text-color); /* Texto oscuro */
       text-align: center;
       line-height: 1.6;
       overflow-x: hidden;
@@ -39,23 +47,24 @@
     /* Modo claro (opcional). 
        Si prefieres un solo modo, quita todo lo que sea .light-mode */
     body.light-mode {
-      background-color: #ffffff !important;
-      color: #333;
+      background-color: var(--bg-light) !important;
+      color: var(--text-color);
     }
 
     /*********************************************
      * ENCABEZADO
     *********************************************/
     header {
-      background-color: #7F77D3; /* Morado */
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       padding: 20px;
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
     header.light-mode {
-      background-color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.9);
     }
 
     nav {
@@ -141,7 +150,7 @@
      * TÍTULOS
     *********************************************/
     h1, h2, h3 {
-      color: #333;
+      color: var(--text-color);
       text-align: center;
       margin-bottom: 15px;
     }
@@ -219,7 +228,7 @@
     .theme-card h3 {
       margin: 10px 0;
       font-size: 1.2rem;
-      color: #333;
+      color: var(--text-color);
     }
     .theme-card p {
       font-size: 0.9em;
@@ -235,7 +244,7 @@
     .toggle-links {
       margin-top: 10px;
       padding: 8px 12px;
-      background-color: #7F77D3;
+      background-color: var(--primary-color);
       color: #fff;
       border: none;
       border-radius: 5px;
@@ -243,7 +252,7 @@
       transition: background 0.3s;
     }
     .toggle-links:hover {
-      background-color: #5f57a0;
+      background-color: var(--secondary-color);
     }
     .platform-links {
       margin-top: 10px;
@@ -256,7 +265,7 @@
     .platform-links a {
       display: block;
       margin: 5px 0;
-      color: #7F77D3;
+      color: var(--primary-color);
       text-decoration: none;
       font-size: 0.9em;
     }
@@ -277,7 +286,7 @@
       text-align: center;
       font-size: 1.8rem;
       margin-bottom: 15px;
-      color: #333;
+      color: var(--text-color);
     }
     #servicio p {
       text-align: center;
@@ -297,17 +306,17 @@
       margin-bottom: 10px;
       font-size: 1rem;
       line-height: 1.5;
-      color: #333;
+      color: var(--text-color);
     }
     ul.service-list li i {
-      color: #7F77D3;
+      color: var(--primary-color);
       margin-right: 10px;
     }
     .service-note {
       text-align: center;
       font-size: 1.1rem;
       font-weight: bold;
-      color: #7F77D3;
+      color: var(--primary-color);
       margin-top: 20px;
     }
 
@@ -324,7 +333,7 @@
     #precios h2 {
       text-align: center;
       font-size: 2rem;
-      color: #333;
+      color: var(--text-color);
       margin-bottom: 20px;
     }
     #precios p {
@@ -346,20 +355,20 @@
       flex: 1 1 250px;
       max-width: 300px;
       text-align: center;
-      color: #333;
+      color: var(--text-color);
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     .price-option h3 {
       font-size: 1.4rem;
       margin-bottom: 10px;
-      color: #7F77D3;
+      color: var(--primary-color);
     }
     .price-option p {
       font-size: 1rem;
       line-height: 1.5;
     }
     .launch-offer {
-      color: #7F77D3;
+      color: var(--primary-color);
       font-weight: bold;
     }
 
@@ -374,7 +383,7 @@
     .payment-methods h3 {
       font-size: 1.4rem;
       margin-bottom: 10px;
-      color: #7F77D3;
+      color: var(--primary-color);
     }
     .payment-methods ul {
       list-style: disc;
@@ -383,10 +392,10 @@
     }
     .payment-methods li {
       margin-bottom: 5px;
-      color: #333;
+      color: var(--text-color);
     }
     .payment-methods a {
-      color: #7F77D3;
+      color: var(--primary-color);
       text-decoration: none;
     }
     .payment-methods a:hover {
@@ -406,7 +415,7 @@
     #personalizacion h2 {
       margin-bottom: 20px;
       text-align: center;
-      color: #333;
+      color: var(--text-color);
     }
     #personalizacion form {
       max-width: 600px;
@@ -423,7 +432,7 @@
     #personalizacion form label {
       display: block;
       margin-bottom: 5px;
-      color: #333;
+      color: var(--text-color);
     }
     #personalizacion form input,
     #personalizacion form textarea,
@@ -438,7 +447,7 @@
       margin-right: 5px;
     }
     button[type="submit"] {
-      background-color: #7F77D3;
+      background-color: var(--primary-color);
       color: #fff;
       font-size: 1rem;
       font-weight: bold;
@@ -453,7 +462,7 @@
       margin: 20px auto 0 auto;
     }
     button[type="submit"]:hover {
-      background-color: #5f57a0;
+      background-color: var(--secondary-color);
       transform: scale(1.03);
     }
     button[type="submit"]:active {
@@ -485,17 +494,17 @@
     #terminos summary h2 {
       margin: 0;
       font-size: 1.8rem;
-      color: #7F77D3;
+      color: var(--primary-color);
     }
     #terminos summary i {
       font-size: 1.2rem;
-      color: #7F77D3;
+      color: var(--primary-color);
     }
     #terminos .terms-content {
       text-align: left;
       margin-top: 20px;
       font-size: 1rem;
-      color: #333;
+      color: var(--text-color);
       line-height: 1.6;
     }
     #terminos ul {
@@ -511,7 +520,7 @@
       margin-top: 30px;
       text-align: center;
       font-size: 1rem;
-      color: #7F77D3;
+      color: var(--primary-color);
       font-style: italic;
     }
 
@@ -522,7 +531,7 @@
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background: #7F77D3;
+      background: var(--primary-color);
       color: #fff;
       border: none;
       padding: 10px 15px;
@@ -547,14 +556,14 @@
      * FOOTER
     *********************************************/
     footer {
-      background-color: #7F77D3;
+      background-color: var(--primary-color);
       padding: 15px;
       color: #fff;
       text-align: center;
     }
     footer.light-mode {
       background-color: #f2f2f2;
-      color: #333;
+      color: var(--text-color);
     }
 
     /*********************************************
@@ -584,7 +593,7 @@
       display: none;
     }
     #chatbot-header {
-      background-color: #7F77D3;
+      background-color: var(--primary-color);
       color: #fff;
       padding: 12px;
       cursor: pointer;
@@ -596,7 +605,7 @@
       transition: background 0.3s;
     }
     #chatbot-header.minimized {
-      background-color: #7F77D3;
+      background-color: var(--primary-color);
     }
     #chatbot-toggle-icon {
       font-size: 18px;
@@ -623,7 +632,7 @@
     }
     #chatbot-send {
       padding: 8px 12px;
-      background-color: #7F77D3;
+      background-color: var(--primary-color);
       color: #fff;
       border: none;
       border-radius: 5px;
@@ -632,7 +641,7 @@
       transition: background 0.3s;
     }
     #chatbot-send:hover {
-      background-color: #5f57a0;
+      background-color: var(--secondary-color);
     }
 
     /*********************************************
@@ -642,7 +651,7 @@
       position: fixed;
       bottom: 20px;
       left: 20px;
-      background: #7F77D3;
+      background: var(--primary-color);
       color: #fff;
       border: none;
       padding: 15px 20px;
@@ -656,7 +665,76 @@
     }
     #floatingButton:hover {
       transform: scale(1.05);
-      background: #5f57a0;
+      background: var(--secondary-color);
+    }
+
+    /*********************************************
+     * COOKIE BANNER
+    *********************************************/
+    #cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      z-index: 10000;
+      font-size: 0.9rem;
+    }
+    #cookie-banner a {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+    #cookie-banner button {
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      margin-left: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    #cookie-banner button:hover {
+      background: var(--secondary-color);
+    }
+
+    /*********************************************
+     * PRIVACY MODAL
+    *********************************************/
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 20000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      text-align: left;
+      position: relative;
+    }
+    .modal-content h2 {
+      color: var(--primary-color);
+    }
+    .modal-content .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--text-color);
+      cursor: pointer;
     }
 
     /*********************************************
@@ -693,7 +771,7 @@
 </head>
 <body>
 
-  <!-- Header (sin ondas ni partículas) -->
+  <!-- Header -->
   <header id="header">
     <nav>
       <div class="logo">GamaTreff</div>
@@ -739,125 +817,23 @@
     <section id="temas" class="section">
       <h2>Escucha mis Temas</h2>
       <p>Encuentra algunas muestras de mi trabajo. Cada tema ha sido creado con dedicación para reflejar la esencia de una historia. Disfruta de la experiencia auditiva y descubre también links a mis plataformas.</p>
-        <div class="theme-cards">
-    <div class="theme-card">
-      <img src="tema1.jpg" alt="Imagen de Code in the Veins" loading="lazy">
-      <h3>Code in the Veins</h3>
-      <p>Plataforma: Spotify</p>
-      <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/Code-in-the-Veins.ogg"></audio>
-      <button class="toggle-links">Ver Links</button>
-      <div class="platform-links">
-        <a href="https://music.youtube.com/">YouTube Music</a>
-        <a href="https://open.spotify.com/">Spotify</a>
-        <a href="https://music.apple.com/">Apple Music</a>
-        <a href="https://www.deezer.com/">Deezer</a>
+      <div class="theme-cards">
+        <!-- Ejemplo de Theme Card -->
+        <div class="theme-card">
+          <img src="tema1.jpg" alt="Imagen de Code in the Veins" loading="lazy">
+          <h3>Code in the Veins</h3>
+          <p>Plataforma: Spotify</p>
+          <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/Code-in-the-Veins.ogg"></audio>
+          <button class="toggle-links">Ver Links</button>
+          <div class="platform-links">
+            <a href="https://music.youtube.com/">YouTube Music</a>
+            <a href="https://open.spotify.com/">Spotify</a>
+            <a href="https://music.apple.com/">Apple Music</a>
+            <a href="https://www.deezer.com/">Deezer</a>
+          </div>
+        </div>
+        <!-- Puedes repetir las demás tarjetas de tema de forma similar -->
       </div>
-    </div>
-    <div class="theme-card">
-      <img src="tema2.jpg" alt="Imagen de Urban Fire" loading="lazy">
-      <h3>Fuego Urbano</h3>
-      <p>Plataforma: Apple Music</p>
-      <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/Fuego-Urbano.ogg"></audio>
-      <button class="toggle-links">Ver Links</button>
-      <div class="platform-links">
-        <a href="https://music.youtube.com/">YouTube Music</a>
-        <a href="https://open.spotify.com/">Spotify</a>
-        <a href="https://music.apple.com/">Apple Music</a>
-        <a href="https://www.deezer.com/">Deezer</a>
-      </div>
-    </div>
-    <div class="theme-card">
-      <img src="tema3.jpg" alt="Imagen de Tema 3" loading="lazy">
-      <h3>Unexpected Call</h3>
-      <p>Plataforma: YouTube</p>
-      <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/Unexpected-Call.ogg"></audio>
-      <button class="toggle-links">Ver Links</button>
-      <div class="platform-links">
-        <a href="https://music.youtube.com/">YouTube Music</a>
-        <a href="https://open.spotify.com/">Spotify</a>
-        <a href="https://music.apple.com/">Apple Music</a>
-        <a href="https://www.deezer.com/">Deezer</a>
-      </div>
-    </div>
-    <div class="theme-card">
-      <img src="tema1.jpg" alt="Imagen de Tema 1" loading="lazy">
-      <h3>The Soul’s Insomnia</h3>
-      <p>Plataforma: Spotify</p>
-      <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/The-Soul’s-Insomnia.ogg"></audio>
-      <button class="toggle-links">Ver Links</button>
-      <div class="platform-links">
-        <a href="https://music.youtube.com/">YouTube Music</a>
-        <a href="https://open.spotify.com/">Spotify</a>
-        <a href="https://music.apple.com/">Apple Music</a>
-        <a href="https://www.deezer.com/">Deezer</a>
-      </div>
-    </div>
-    <div class="theme-card">
-      <img src="tema1.jpg" alt="Imagen de Tema 1" loading="lazy">
-      <h3>Machine Uprising</h3>
-      <p>Plataforma: Spotify</p>
-      <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/Machine-Uprising.ogg"></audio>
-      <button class="toggle-links">Ver Links</button>
-      <div class="platform-links">
-        <a href="https://music.youtube.com/">YouTube Music</a>
-        <a href="https://open.spotify.com/">Spotify</a>
-        <a href="https://music.apple.com/">Apple Music</a>
-        <a href="https://www.deezer.com/">Deezer</a>
-      </div>
-    </div>
-    <div class="theme-card">
-      <img src="tema1.jpg" alt="Imagen de Tema 1" loading="lazy">
-      <h3>Love and Rage</h3>
-      <p>Plataforma: Spotify</p>
-      <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/Love-and-Rage.ogg"></audio>
-      <button class="toggle-links">Ver Links</button>
-      <div class="platform-links">
-        <a href="https://music.youtube.com/">YouTube Music</a>
-        <a href="https://open.spotify.com/">Spotify</a>
-        <a href="https://music.apple.com/">Apple Music</a>
-        <a href="https://www.deezer.com/">Deezer</a>
-      </div>
-    </div>
-    <div class="theme-card">
-      <img src="tema1.jpg" alt="Imagen de Tema 1" loading="lazy">
-      <h3>Light Up the Night</h3>
-      <p>Plataforma: Spotify</p>
-      <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/Light-Up-the-Night.ogg"></audio>
-      <button class="toggle-links">Ver Links</button>
-      <div class="platform-links">
-        <a href="https://music.youtube.com/">YouTube Music</a>
-        <a href="https://open.spotify.com/">Spotify</a>
-        <a href="https://music.apple.com/">Apple Music</a>
-        <a href="https://www.deezer.com/">Deezer</a>
-      </div>
-    </div>
-    <div class="theme-card">
-      <img src="tema1.jpg" alt="Imagen de Tema 1" loading="lazy">
-      <h3>Lights Up</h3>
-      <p>Plataforma: Spotify</p>
-      <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/Lights-Up.ogg"></audio>
-      <button class="toggle-links">Ver Links</button>
-      <div class="platform-links">
-        <a href="https://music.youtube.com/">YouTube Music</a>
-        <a href="https://open.spotify.com/">Spotify</a>
-        <a href="https://music.apple.com/">Apple Music</a>
-        <a href="https://www.deezer.com/">Deezer</a>
-      </div>
-    </div>
-    <div class="theme-card">
-      <img src="tema1.jpg" alt="Imagen de Tema 1" loading="lazy">
-      <h3>Code in the Veins</h3>
-      <p>Plataforma: Spotify</p>
-      <audio class="audio-preview" controls controlsList="nodownload" src="https://uibg9312.github.io/gamatreff.github.io-/Code-in-the-Veins.ogg"></audio>
-      <button class="toggle-links">Ver Links</button>
-      <div class="platform-links">
-        <a href="https://music.youtube.com/">YouTube Music</a>
-        <a href="https://open.spotify.com/">Spotify</a>
-        <a href="https://music.apple.com/">Apple Music</a>
-        <a href="https://www.deezer.com/">Deezer</a>
-      </div>
-    </div>
-  </div>
     </section>
 
     <!-- Sección "Servicio" -->
@@ -964,7 +940,7 @@
               oninvalid="this.setCustomValidity('Marca la casilla para continuar')"
               oninput="this.setCustomValidity('')">
             Confirmo que he leído, comprendido y acepto los 
-            <a href="#terminos" style="color: #7F77D3; text-decoration: underline;"
+            <a href="#terminos" style="color: var(--primary-color); text-decoration: underline;"
                onclick="document.querySelector('#terminos details').setAttribute('open','');">
               Términos y Condiciones
             </a>
@@ -980,7 +956,7 @@
     <!-- Sección de Contacto -->
     <section id="contacto" class="section">
       <h2>Contacto</h2>
-      <p>Escríbeme a <a href="mailto:tuemail@ejemplo.com" style="color:#7F77D3;">uibg931204@gmail.com</a> o sígueme en mis redes sociales.</p>
+      <p>Escríbeme a <a href="mailto:tuemail@ejemplo.com" style="color:var(--primary-color);">uibg931204@gmail.com</a> o sígueme en mis redes sociales.</p>
     </section>
 
     <!-- Sección de Términos y Condiciones -->
@@ -1038,7 +1014,7 @@
   </div><!-- Fin .container -->
 
   <footer id="footer">
-    <p>&copy; 2025 GamaTreff. Todos los derechos reservados.</p>
+    <p>&copy; 2025 GamaTreff. Todos los derechos reservados. | <a href="#" id="footerPrivacyLink" style="color:#fff; text-decoration: underline;">Política de Privacidad</a></p>
   </footer>
 
   <!-- Botón "Volver arriba" -->
@@ -1058,6 +1034,22 @@
 
   <!-- Botón flotante para ir al formulario -->
   <button id="floatingButton">¡Empieza tu personalización!</button>
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner">
+    <span>Este sitio utiliza cookies para mejorar la experiencia del usuario. Consulta nuestra <a href="#" id="cookiePrivacyLink">Política de Privacidad</a>.</span>
+    <button id="acceptCookies">Aceptar</button>
+  </div>
+
+  <!-- Privacy Policy Modal -->
+  <div id="privacyModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="privacyModalClose">&times;</span>
+      <h2>Política de Privacidad</h2>
+      <p>Aquí puedes detallar la política de privacidad de tu sitio web. Por ejemplo, explicar cómo se recopilan, utilizan y protegen los datos de los usuarios, el uso de cookies y la manera en que se almacenan o comparten la información personal.</p>
+      <p>Esta política debe cumplir con las normativas vigentes sobre protección de datos y privacidad, como el GDPR en Europa y otras legislaciones aplicables.</p>
+    </div>
+  </div>
 
   <!-- ===============================
        SCRIPTS
@@ -1130,11 +1122,7 @@
       typewriterElement.textContent = "Bienvenidos a GamaTreff - Música Personalizada";
     });
 
-    // Quitar lógica de partículas y ondas (ya no existe canvas ni SVGOverlay)
-
-    /*********************************************
-     * CHAT BOT - JS
-    *********************************************/
+    // Chat Bot - JS
     (function() {
       const chatbotHeader = document.getElementById('chatbot-header');
       const chatbotMessages = document.getElementById('chatbot-messages');
@@ -1177,11 +1165,9 @@
         const msg = userMessage.toLowerCase();
         let response = "Lo siento, no entiendo. ¿Podrías reformular tu pregunta?";
 
-        // Ejemplos de lógica de respuesta
         if (msg.includes("hola") || msg.includes("buenos") || msg.includes("saludos") || msg.includes("hey")) {
           response = "¡Hola! Bienvenido a GamaTreff. ¿En qué puedo ayudarte con tu personalización musical?";
         }
-        // ... (Aquí vendrían más condiciones de respuesta)
         
         setTimeout(() => {
           appendMessage('bot', response);
@@ -1235,29 +1221,14 @@
               player.pause();
               player.currentTime = 0;
             }
-          }, 60000); // 1 minuto
+          }, 60000);
         });
       });
     });
 
-
-  </script>
-
-  <!-- Incluye EmailJS -->
-  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function(){
-      // Inicializa EmailJS con tu User ID (en este caso, se usa el valor proporcionado)
-      emailjs.init("g2QrgmDofWM0mBurr");
-    })();
-  </script>
-  
-  <script>
-    // Envío del formulario de personalización con EmailJS, procesando los checkboxes de géneros
+    // Envío del formulario de personalización con EmailJS
     document.getElementById('personalization-form').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevenir el comportamiento por defecto
-
-      // Procesar los checkboxes de géneros y guardar el resultado en el campo oculto "genres_list"
+      event.preventDefault();
       const checkboxes = document.querySelectorAll('input[name="genres"]:checked');
       let genresArray = [];
       checkboxes.forEach((checkbox) => {
@@ -1265,7 +1236,6 @@
       });
       document.getElementById('genres_list').value = genresArray.join(', ');
 
-      // Envía el formulario a través de EmailJS (ajusta los IDs de servicio y plantilla según tus datos)
       emailjs.sendForm('service_v1guq8k', 'template_0gwbyg8', this)
         .then(function() {
           alert('¡Formulario enviado correctamente! Te contactaremos pronto.');
@@ -1274,9 +1244,48 @@
           alert('Ocurrió un error al enviar el formulario: ' + JSON.stringify(error));
         });
     });
+
+    // Cookie Banner functionality
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptCookiesBtn = document.getElementById('acceptCookies');
+    if(localStorage.getItem('cookiesAccepted')) {
+      cookieBanner.style.display = 'none';
+    }
+    acceptCookiesBtn.addEventListener('click', () => {
+      localStorage.setItem('cookiesAccepted', 'true');
+      cookieBanner.style.display = 'none';
+    });
+
+    // Privacy Modal functionality
+    const privacyModal = document.getElementById('privacyModal');
+    const privacyModalClose = document.getElementById('privacyModalClose');
+    const footerPrivacyLink = document.getElementById('footerPrivacyLink');
+    const cookiePrivacyLink = document.getElementById('cookiePrivacyLink');
+
+    function openPrivacyModal(e) {
+      e.preventDefault();
+      privacyModal.style.display = 'block';
+    }
+    footerPrivacyLink.addEventListener('click', openPrivacyModal);
+    cookiePrivacyLink.addEventListener('click', openPrivacyModal);
+
+    privacyModalClose.addEventListener('click', () => {
+      privacyModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+      if (event.target === privacyModal) {
+        privacyModal.style.display = 'none';
+      }
+    });
   </script>
 
-
-  
+  <!-- Incluye EmailJS -->
+  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      emailjs.init("g2QrgmDofWM0mBurr");
+    })();
+  </script>
 </body>
 </html>
