@@ -44,12 +44,19 @@
       transition: background 0.5s ease-in-out;
     }
 
-    /* Modo claro (opcional). 
-       Si prefieres un solo modo, quita todo lo que sea .light-mode */
-    body.light-mode {
-      background-color: var(--bg-light) !important;
-      color: var(--text-color);
-    }
+      body.light-mode {
+        background-color: #4b3f72 !important; /* Fondo morado oscuro */
+        color: #ddd;
+      }
+      header.light-mode {
+        background: linear-gradient(135deg, #5d4b8d, #483070);
+      }
+      footer.light-mode {
+        background-color: #5d4b8d;
+        color: #ddd;
+      }
+
+    
 
     /*********************************************
      * ENCABEZADO
