@@ -1527,11 +1527,136 @@
       function botResponse(userMessage) {
         const msg = userMessage.toLowerCase();
         let response = "Lo siento, no entiendo. ¿Podrías reformular tu pregunta?";
-
+      
+        // 1. Saludos
         if (msg.includes("hola") || msg.includes("buenos") || msg.includes("saludos") || msg.includes("hey")) {
           response = "¡Hola! Bienvenido a GamaTreff. ¿En qué puedo ayudarte con tu personalización musical?";
         }
-        
+        // 2. Preguntas generales de precios
+        else if (msg.includes("precio") || msg.includes("cuánto cuesta") || msg.includes("costo") || msg.includes("tarifa")) {
+          response = "Nuestros paquetes tienen diferentes precios: Básico ($200), Premium ($250) y Deluxe ($350). ¿Te interesa algún paquete en particular?";
+        }
+        // 3. Paquete Básico
+        else if (msg.includes("básico") || msg.includes("opción básico")) {
+          response = "El paquete Básico cuesta $200 e incluye una canción personalizada basada en tus ideas, con letra original y música.";
+        }
+        // 4. Paquete Premium
+        else if (msg.includes("premium") || msg.includes("opción premium")) {
+          response = "El paquete Premium cuesta $250 e incluye la canción personalizada con letra original, música y dos revisiones.";
+        }
+        // 5. Paquete Deluxe
+        else if (msg.includes("deluxe") || msg.includes("opción deluxe")) {
+          response = "El paquete Deluxe cuesta $350 e incluye la canción personalizada con letra original, música, portada personalizada y tres revisiones.";
+        }
+        // 6. Preguntas sobre planes y opciones
+        else if (msg.includes("plan") || msg.includes("paquete") || msg.includes("opciones")) {
+          response = "Ofrecemos tres paquetes: Básico, Premium y Deluxe. Cada uno se adapta a distintas necesidades y presupuestos. ¿Te gustaría saber más detalles de alguno?";
+        }
+        // 7. Revisiones y ajustes
+        else if (msg.includes("revisión") || msg.includes("ajustes") || msg.includes("cambios")) {
+          response = "Cada paquete incluye un número limitado de revisiones. Si necesitas cambios adicionales, se aplicará un costo extra. ¿Quieres que te explique cuántas revisiones incluye cada paquete?";
+        }
+        // 8. Tiempos de entrega
+        else if (msg.includes("entrega") || msg.includes("tiempo") || msg.includes("cuándo") || msg.includes("duración")) {
+          response = "El tiempo de entrega varía según el paquete, pero normalmente oscila entre 7 y 14 días. ¿Tienes alguna fecha límite en mente?";
+        }
+        // 9. Métodos de pago
+        else if (msg.includes("pago") || msg.includes("transferencia") || msg.includes("mercadopago") || msg.includes("paypal") || msg.includes("método de pago")) {
+          response = "Aceptamos MercadoPago, PayPal y Transferencia Interbancaria. ¿Necesitas ayuda para elegir el método de pago?";
+        }
+        // 10. Cancelaciones y reembolsos
+        else if (msg.includes("cancelar") || msg.includes("reembolso") || msg.includes("devolución")) {
+          response = "Si cancelas antes de iniciar la producción, se reembolsará el 80% del pago; una vez comenzado el trabajo, no se realizan reembolsos. ¿Te gustaría más información sobre esta política?";
+        }
+        // 11. Confidencialidad y protección de datos
+        else if (msg.includes("confidencial") || msg.includes("privacidad") || msg.includes("datos")) {
+          response = "Toda la información que nos proporciones será tratada de forma confidencial y usada exclusivamente para la creación de tu canción personalizada.";
+        }
+        // 12. Derechos de autor y uso
+        else if (msg.includes("derechos") || msg.includes("autor") || msg.includes("propiedad")) {
+          response = "La canción es para uso personal y no puede ser revendida sin acuerdo previo. Nos reservamos los derechos de autor, salvo que se acuerde lo contrario con un costo adicional.";
+        }
+        // 13. Uso de SUNO AI y herramientas de IA
+        else if (msg.includes("suno") || msg.includes("ia") || msg.includes("inteligencia artificial") || msg.includes("machine learning")) {
+          response = "Utilizamos SUNO AI para generar tus canciones personalizadas, lo que nos permite crear música única basándonos en tus ideas. Se otorgará el crédito correspondiente a SUNO AI.";
+        }
+        // 14. Proceso y funcionamiento del servicio
+        else if (msg.includes("proceso") || msg.includes("cómo funciona") || msg.includes("procedimiento") || msg.includes("pasos")) {
+          response = "Nuestro proceso consiste en recibir tus ideas mediante el formulario, trabajar en la personalización y enviarte la canción final. ¿Te gustaría conocer algún paso en detalle?";
+        }
+        // 15. Contacto y medios de comunicación
+        else if (msg.includes("contacto") || msg.includes("correo") || msg.includes("teléfono") || msg.includes("llamar") || msg.includes("comunicar")) {
+          response = "Puedes contactarnos a través del formulario de nuestra web o enviarnos un correo a tuemail@ejemplo.com. ¿Necesitas ayuda para comunicarte con nosotros?";
+        }
+        // 16. Preguntas sobre música personalizada
+        else if (msg.includes("música personalizada") || msg.includes("canción personalizada")) {
+          response = "Creamos canciones personalizadas que cuentan tu historia. ¿Te gustaría saber cómo podemos transformar tus ideas en música?";
+        }
+        // 17. Inspiración e ideas
+        else if (msg.includes("inspiración") || msg.includes("idea")) {
+          response = "La inspiración es clave para crear algo único. Cuéntame, ¿qué te inspira o qué idea tienes para tu canción?";
+        }
+        // 18. Calidad y sonido
+        else if (msg.includes("calidad") || msg.includes("audio") || msg.includes("sonido")) {
+          response = "Nos aseguramos de que cada canción tenga un audio de alta calidad y un sonido profesional. ¿Te interesa conocer más sobre nuestro proceso de producción?";
+        }
+        // 19. Revisiones adicionales
+        else if (msg.includes("revisión extra") || msg.includes("más cambios") || msg.includes("adicional")) {
+          response = "Si necesitas revisiones adicionales fuera de las incluidas en tu paquete, se aplicará un costo extra. ¿Te gustaría saber cuánto cuesta una revisión extra?";
+        }
+        // 20. Creatividad y originalidad
+        else if (msg.includes("creatividad") || msg.includes("original") || msg.includes("única")) {
+          response = "Cada canción es creada de manera original, fusionando tus ideas con un toque creativo. ¿Quieres que te cuente más sobre nuestro proceso creativo?";
+        }
+        // 21. Estilos y géneros musicales
+        else if (msg.includes("estilo") || msg.includes("género") || msg.includes("rock") || msg.includes("pop") || msg.includes("jazz") || msg.includes("balada") || msg.includes("electrónica")) {
+          response = "Trabajamos con diversos estilos y géneros musicales, adaptándonos a tus gustos. ¿Tienes algún género en particular en mente?";
+        }
+        // 22. Extras: portadas y covers
+        else if (msg.includes("portada") || msg.includes("cover") || msg.includes("imagen") || msg.includes("extra")) {
+          response = "Algunos de nuestros paquetes, como el Deluxe, incluyen extras como una portada personalizada. ¿Te interesa agregar algún extra a tu pedido?";
+        }
+        // 23. Descuentos y promociones
+        else if (msg.includes("descuento") || msg.includes("oferta") || msg.includes("promoción")) {
+          response = "Ocasionalmente ofrecemos descuentos y promociones especiales. ¿Quieres estar al tanto de nuestras ofertas de lanzamiento?";
+        }
+        // 24. Urgencia y plazos cortos
+        else if (msg.includes("urgente") || msg.includes("prisa") || msg.includes("rápido") || msg.includes("inmediato")) {
+          response = "Entendemos que a veces el tiempo es esencial. Podemos intentar adaptarnos a pedidos urgentes, aunque podrían aplicarse cargos adicionales. ¿Es urgente tu solicitud?";
+        }
+        // 25. Número de revisiones
+        else if (msg.includes("cuántas revisiones") || msg.includes("número de revisiones")) {
+          response = "Cada paquete incluye un número específico de revisiones: Básico (1 revisión), Premium (2 revisiones) y Deluxe (3 revisiones).";
+        }
+        // 26. Personalización del contenido
+        else if (msg.includes("personalizar") || msg.includes("personalización")) {
+          response = "Nos gusta adaptar cada detalle a tus necesidades. ¿Qué elementos te gustaría personalizar en tu canción?";
+        }
+        // 27. Asesoramiento y consejos
+        else if (msg.includes("asesoramiento") || msg.includes("consejo") || msg.includes("sugerencia")) {
+          response = "Estoy aquí para ayudarte. Cuéntame qué necesitas y con gusto te brindaré asesoramiento para que tu canción sea perfecta.";
+        }
+        // 28. Cambios en la letra
+        else if (msg.includes("letra") || msg.includes("cambio de letra")) {
+          response = "Si necesitas modificar la letra, podemos hacer ajustes durante el proceso de revisión. ¿Tienes alguna idea específica en mente?";
+        }
+        // 29. Proceso creativo y conceptualización
+        else if (msg.includes("proceso creativo") || msg.includes("creativo") || msg.includes("conceptualización")) {
+          response = "Nuestro proceso creativo se basa en fusionar tus ideas con técnicas innovadoras, aprovechando herramientas como SUNO AI. ¿Te gustaría saber más sobre cómo trabajamos?";
+        }
+        // 30. Experiencia y testimonios
+        else if (msg.includes("experiencia") || msg.includes("historia") || msg.includes("testimonio") || msg.includes("anécdota")) {
+          response = "Hemos ayudado a muchos clientes a contar sus historias a través de la música. ¿Te gustaría conocer algunos testimonios o ejemplos de nuestro trabajo?";
+        }
+        // 31. Soporte y ayuda técnica
+        else if (msg.includes("soporte") || msg.includes("ayuda") || msg.includes("problema")) {
+          response = "Si tienes algún problema o necesitas ayuda técnica, no dudes en contactarnos. ¿En qué puedo asistirte específicamente?";
+        }
+        // 32. Revisión final
+        else if (msg.includes("revisión final") || msg.includes("última revisión")) {
+          response = "La revisión final se realiza para asegurarnos de que la canción cumpla con tus expectativas. ¿Quieres saber cómo funciona este paso?";
+        }
+              
         setTimeout(() => {
           appendMessage('bot', response);
         }, 500);
