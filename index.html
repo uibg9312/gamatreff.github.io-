@@ -940,7 +940,9 @@
   <!-- Header -->
   <header id="header">
     <nav>
-      <div class="logo">GamaTreff</div>
+      <a href="#inicio" class="logo">
+        <img src="rutalogo.png" alt="GamaTreff Logo" style="max-height: 50px; border-radius: 10px;">
+      </a>
       <ul>
         <li><a href="#inicio" class="nav-link">Inicio</a></li>
         <li><a href="#porquegamatreff" class="nav-link">¿Por qué GamaTreff?</a></li>
@@ -951,9 +953,7 @@
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
         <i class="fas fa-bars"></i>
       </button>
-      <button class="theme-toggle" id="themeToggle" title="Cambiar tema">
-        <i class="fas fa-adjust"></i>
-      </button>
+      
     </nav>
   </header>
 
@@ -1448,13 +1448,15 @@
   <!-- ===============================
        SCRIPTS
   ================================ -->
+  
   <script>
-    // Modo claro/oscuro guardado en localStorage
+    /*// Modo claro/oscuro guardado en localStorage
     if(localStorage.getItem('theme') === 'light'){
       document.body.classList.add('light-mode');
       document.getElementById('header').classList.add('light-mode');
       document.getElementById('footer').classList.add('light-mode');
     }
+      */
 
     // Navegación suave
     document.querySelectorAll('.nav-link').forEach(link => {
@@ -1468,7 +1470,7 @@
       });
     });
 
-    // Toggle de tema
+    /*// Toggle de tema
     const themeToggle = document.getElementById('themeToggle');
     themeToggle.addEventListener('click', () => {
       document.body.classList.toggle('light-mode');
@@ -1476,7 +1478,7 @@
       document.getElementById('footer').classList.toggle('light-mode');
       localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
     });
-
+    */
     // Menú hamburguesa en móviles
     const menuToggle = document.getElementById('menuToggle');
     const navUl = document.querySelector('nav ul');
